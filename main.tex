@@ -41,7 +41,7 @@
 \DeclareMathOperator{\Var}{Var}
 \title{A continuum charge-transport index for the lowest Landau level}
 \author{}
-\date{Working note, 6 November 2026}
+\date{Working note, 7 November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -57,13 +57,13 @@ Gaussian projection kernels then supply locality, while physical
 regional particle numbers retain integer spectra.  The construction
 uses no localized orthonormal basis and no discrete tight frame.
 The low-energy sector is a band of \(d\) states with width at most
-\(w\), separated from higher states by a uniform gap \(\gamma>2w\).
+\(w\), separated from higher states by a uniform gap \(\gamma>w\).
 Exact degeneracy is not assumed; exponentially small splitting is
 included.  For uniformly bounded local LLL field polynomials, a
 particle-addition estimate preserves this band under the enlargement
 when the relevant filling stays below saturation.  Neither positivity
-nor zero ground energy is needed.  Positive parents whose lowest
-energy is zero also admit the enlargement at saturation.
+nor zero ground energy is needed.  More generally, a uniform bound
+on the energy decrease under particle removal suffices.
 Magnetic translation gives the constraint
 \(dn_\sigma/N_\phi\in\mathbb Z+O(L^{-\infty})\), where \(d\)
 is the rank of this band in the selected spin-number sector.
@@ -72,6 +72,8 @@ At balanced rational filling \(\nu=p/q\) in lowest terms,
 for odd \(p\), and \(q\) for even \(p\).
 The same divisibility holds for the full low-energy band at fixed total
 particle number when the Hamiltonian has spin-exchange symmetry.
+With full \(\mathrm{SU}(2)\) symmetry, such a band consists entirely
+of spin singlets for all sufficiently large tori.
 Appendices derive the required kernel, propagation, and spectral-filter
 estimates.
 No gap at nonzero boundary twist or local accessibility of the first
@@ -102,16 +104,15 @@ rotation does not preserve the LLL.  We retain the full spatial
 Hilbert space to resolve both issues, and penalize its additional
 modes to preserve the desired low-energy spectrum.
 
-The penalty is particularly simple for a positive parent Hamiltonian
-with zero-energy ground states.  We also treat general self-adjoint,
+We work throughout with general self-adjoint,
 number-conserving polynomials of uniformly bounded degree and
 coefficients in localized LLL fields.  Averaging the energy of adding
 a particle gives a uniform bound on the change of ground energy
 between number sectors.  At fillings bounded away from saturation,
 this proves that a sufficiently large, size-independent penalty
 preserves the desired spectral band and its gap to higher states.
-No gaps in the
-smaller particle-number sectors are needed for that comparison.
+No sign condition on the interaction, zero-energy condition, or gaps
+in the smaller particle-number sectors are needed for that comparison.
 
 Only magnetic translations at the original boundary conditions are
 needed.  The auxiliary parameter in the index proof parametrizes
@@ -124,8 +125,8 @@ The general spin-resolved constraint is derived first.  We then
 specialize to balanced populations, discuss the numerator and
 denominator parity, and prove a fixed-total-number version using
 spin-exchange symmetry.  The general polynomial class covers balanced
-fillings \(0<\nu<2\); the positive-parent case also covers the
-saturated endpoint.  The rank \(d\) is fixed and the gap above the
+fillings \(0<\nu<2\); at saturation the same proof applies
+if a uniform energy-removal bound is verified separately.  The rank \(d\) is fixed and the gap above the
 band is uniform in the selected number sector.  The exact multiplicity
 of the lowest eigenvalue may be smaller than \(d\).
 
@@ -150,7 +151,8 @@ sections obey
  f(x+L_x,y)=e^{\ii L_xy}f(x,y),\qquad
  f(x,y+L_y)=f(x,y).
 \end{equation}
-Let \(\FF=\FF_{\mathrm a}(\mathfrak h\otimes\mathbb C^2)\).
+Let \(\FF=\FF_{\mathrm a}(\mathfrak h\otimes\mathbb C^2)\),
+the fermionic Fock space for spin-\(1/2\) electrons.
 The annihilation operators are antilinear in their argument and satisfy
 \[
  \{a_\sigma(f),a_{\sigma'}^\dagger(g)\}
@@ -189,7 +191,8 @@ An estimate \(A\eqL B\) means
 \(\norm{(A-B)|_{\HH_{\bm n}}}\le C_kL^{-k}\) for every \(k\).
 When a bound is in ambient Fock-space norm we say so explicitly.
 All constants may depend on the fixed density bound, aspect-ratio
-bounds, interaction, and gap, but not on \(L\).
+bounds, interaction, band rank, and spectral bounds (including the
+separation margin \(\gamma-w\)), but not on \(L\).
 Polynomial factors in \(L\), and square roots, preserve an
 \(\epsL\) error.
 
@@ -207,13 +210,18 @@ Define
 \]
 The two \(S_\pm\) are separated by a distance proportional to \(L\).
 
-\subsection{Transport data and the theorem}
+\subsection{Hypotheses and statement of the index theorem}
 
 Let \(P=P_L\) be an orthogonal projection of fixed finite rank \(d\)
 in \(\HH_{\bm n}\).  The following hypotheses isolate the algebraic
-content of the index proof.
+content of the index proof.  The conditions on \(U\) and its
+boundary charge transport correspond to Assumption~2
+(``Charge and locality preserving \(U\)'') of \cite{BBDF21}.
+Here we state the boundary-locality properties needed in the proof
+explicitly, and also include the dressing and clustering hypotheses
+that are established from the spectral gap below.
 
-\begin{assumption}[Transport and subspace data]\label{ass:index}
+\begin{assumption}[Hypotheses of the index theorem]\label{ass:index}
 \leavevmode
 \begin{enumerate}
 \item \(U\) is an ambient unitary preserving both particle numbers,
@@ -248,8 +256,8 @@ There are also self-adjoint, neutral \(K_\pm^U\), localized in
 \end{enumerate}
 \end{assumption}
 
-The normalization \eqref{eq:transportnormalization} is part of the
-transport data.  We do not infer it from a tensor-factor argument
+The normalization \eqref{eq:transportnormalization} is an explicit
+hypothesis.  We do not infer it from a tensor-factor argument
 inside a fixed-particle-number sector.  It will hold exactly for
 magnetic translation.  Spatial support in this assumption means
 ambient support, not support of a compression to the LLL.
@@ -264,16 +272,26 @@ Consequently the normalized transport
 \(d^{-1}\mathbb Z\).
 \end{theorem}
 
-The proof is in Section~\ref{sec:proof}.  For \(d=1\),
-\eqref{eq:groundcluster} is ordinary connected clustering, and the
-dressed charge has the vector spanning \(\Ran P\) as an approximate
-eigenvector.
-The proof then reduces to a scalar phase calculation, as in the
-organization of \cite{BBDF19}.  Keeping \(d\) arbitrary requires only
-replacing that phase by the determinant of a compressed unitary.
-In particular, we never apply the rank-one theorem separately to
-vectors in a higher-rank subspace.  No equality of energies within
-\(\Ran P\) is required by this abstract theorem or its proof.
+The proof in Section~\ref{sec:proof} follows closely the structure of
+\cite[Section~4]{BBDF19}. For \(d=1\), \eqref{eq:groundcluster} is ordinary connected
+clustering and the calculation concerns a scalar phase, as in that
+paper.  For general \(d\), approximate eigenvector statements become
+approximate invariance of \(\Ran P\), and the scalar phase is replaced
+by the determinant of the boundary unitary compressed to \(\Ran P\).
+This finite-rank argument is already used in the proof of
+\cite[Theorem~3.2, Section~4]{BBDF21}; the determinant construction
+here is an adaptation of that proof.  We compute its derivative
+directly by Jacobi's formula.  At \(2\pi\), the compressed unitary
+is approximately a group commutator, whose determinant is one,
+yielding \eqref{eq:index}.
+
+The continuum adaptation keeps spatial locality on the full Fock
+space while estimating unbounded charges in a fixed-number sector.
+The LLL-specific work is the verification of the hypotheses below,
+rather than a different mechanism for integrality.  We never apply
+the rank-one theorem separately to vectors in a higher-rank subspace,
+and no equality of energies within \(\Ran P\) is required by this
+abstract theorem or its proof.
 
 \subsection{The LLL and an exact enlargement}
 
@@ -318,22 +336,11 @@ and annihilators of each spin.  Thus the monomials are even and
 neutral individually.  No sign condition on \(h_R\) is imposed.
 \end{definition}
 
-\begin{definition}[Positive local LLL parent]\label{def:parent}
-A positive parent is the special case of Definition~\ref{def:local}
-with
-\[
- h_R=\sum_{\alpha=1}^{s}B_\alpha(R)^\dagger B_\alpha(R),
-\]
-where the \(B_\alpha(R)\) are polynomials in annihilators with
-the same uniform bounds.  In applications of the positive-parent
-gap comparison, the target sector is assumed to contain zero modes.
-\end{definition}
-
 \begin{assumption}[Isolated low-energy band]\label{ass:band}
 In the selected all-LLL number sector, list the eigenvalues of
 \(H_{\mathrm{LLL}}\) as \(E_1(L)\le E_2(L)\le\cdots\), counted
 with multiplicity.  There are size-independent constants
-\(d\in\mathbb N\), \(w\ge0\), and \(\gamma>2w\) such that
+\(d\in\mathbb N\), \(w\ge0\), and \(\gamma>w\) such that
 \begin{equation}\label{eq:bandhypothesis}
  w_L:=E_d(L)-E_1(L)\le w,\qquad
  \gamma_L:=E_{d+1}(L)-E_d(L)\ge\gamma.
@@ -346,15 +353,17 @@ itself has dimension \(d\), use \(E_{d+1}=+\infty\).
 
 We call \(\Ran P\) the low-energy band or sector.  In particular,
 \(d\) is not assumed to be the multiplicity of \(E_1\).
-The condition \(\gamma>2w\) is a convenient sufficient separation
-for the filters below, matching the spectral-band formulation in
-\cite{BBDF21}.  If \(w_L\to0\) and the gap above the band stays
+The condition \(\gamma>w\) separates intraband energy differences
+from transitions across the gap.  It suffices for the filter used
+in Appendix~\ref{app:filters}.  Assumption~1 of \cite{BBDF21}
+uses the stronger condition \(\gamma>2w\) in our notation;
+we do not need that extra factor of two.  If \(w_L\to0\) and the gap above the band stays
 positive, it holds for all sufficiently large sizes after choosing
-a fixed \(w<\gamma/2\).  Exponential decay of \(w_L\) is more
+a fixed \(w<\gamma\).  Exponential decay of \(w_L\) is more
 than is needed.  An exactly degenerate ground space is the special
 case \(w_L=0\).
 
-For either interaction definition the same polynomial defines a bounded operator
+The polynomial in Definition~\ref{def:local} also defines a bounded operator
 on the full Fock space, acting as the LLL operator tensored with the
 identity on spectator modes.  The CAR give \(\norm{h_R}\le C\)
 and \(\norm{H_{\mathrm{LLL}}}\le CM\).  For fixed \(\mu>0\), set
@@ -363,31 +372,7 @@ and \(\norm{H_{\mathrm{LLL}}}\le CM\).  For fixed \(\mu>0\), set
        +\mu\sum_{\sigma=\up,\dn}\dG_\sigma(1-\Pi).
 \end{equation}
 
-\begin{lemma}[Positive-parent comparison]\label{lem:comparison}
-For Definition~\ref{def:parent}, in a fixed spin-number sector
-or a fixed-total-number sector, the spectrum of
-\(H_{\mathrm{ext}}\) below \(\mu\), including multiplicities,
-equals that of \(H_{\mathrm{LLL}}\) on the all-LLL sector below
-\(\mu\).  In particular, suppose its lowest energy is zero and
-its lowest \(d\) states have width at most \(w<\mu\) and gap
-at least \(\gamma>0\) above them.  The enlargement preserves
-this band, with the same eigenvalues and spectral projection,
-and a gap above it of at least \(\min(\gamma,\mu-w)\).
-For \(w=0\), this includes the exact-zero-mode comparison.
-\end{lemma}
-\begin{proof}
-Decompose the one-particle space as
-\(\mathfrak h_0\oplus\mathfrak h_0^\perp\) for each spin.
-The interaction commutes with the number \(r\) of particles in
-the second summand.  On that block the penalty is \(\mu r\) and
-the interaction is nonnegative.  Blocks with \(r\ge1\) have
-energies at least \(\mu\); the \(r=0\) block is exactly the
-original LLL problem.  Positivity holds in every particle-number
-block because of Definition~\ref{def:parent}.  The top of the
-selected band is at most \(w\), giving the asserted gap above it.
-\end{proof}
-
-\subsection{Particle addition and removal of positivity}
+\subsection{Particle addition and spectral-band preservation}
 \label{sec:addition}
 
 We now prove a uniform comparison of ground energies for the general
@@ -506,8 +491,10 @@ they require neither positivity nor gaps in any intermediate sector.
 \end{proof}
 
 \begin{lemma}[General spectral-band comparison]\label{lem:generalcomparison}
-Let \(H\) satisfy Definition~\ref{def:local}.  Suppose its lowest
-\(d\) states in the selected all-LLL sector have width
+Let \(H\) be a self-adjoint operator on the LLL Fock space,
+conserving both spin numbers, and extend it by the identity on
+spectator modes.  Locality is not needed for this lemma.
+Suppose its lowest \(d\) states in the selected all-LLL sector have width
 \(E_d-E_1\le w\), with a gap \(E_{d+1}-E_d\ge\gamma>0\)
 above them.  Write \(P\) for their spectral projection.  For this
 comparison alone, no relation between \(\gamma\) and \(w\) is needed.
@@ -551,16 +538,13 @@ use \(E_{\mathrm{tot}}(N)=E_1\) and \eqref{eq:removaltotal}
 to obtain the same comparison.
 \end{proof}
 
-Lemma~\ref{lem:removal} verifies this comparison for general local
-polynomials below saturation, with \(C_{\mathrm{rem}}=C_\epsilon\).
-For a positive parent with \(E_1=0\), positivity in every number
-sector gives the removal bound directly with
-\(C_{\mathrm{rem}}=0\), recovering Lemma~\ref{lem:comparison}
-without a filling restriction.  The particle-addition argument
-does not establish a uniform constant when the density of empty
-orbitals tends to zero.  The positive-parent comparison remains
-available in that case, or one can verify a uniform removal bound
-by another argument.
+Lemma~\ref{lem:removal} verifies this comparison for all interactions
+in Definition~\ref{def:local} below saturation, with
+\(C_{\mathrm{rem}}=C_\epsilon\).  No positivity or zero-energy
+assumption is used.  The particle-addition argument does not establish
+a uniform constant when the density of empty orbitals tends to zero.
+In that case the same comparison applies if a uniform removal bound
+is verified separately.
 
 For balanced populations with limiting filling \(0<\nu<2\),
 one can choose any fixed \(\epsilon<1-\nu/2\) for all large
@@ -601,19 +585,13 @@ these excursions compatible with a gap in the enlarged sector.
 Let \(H_{\mathrm{LLL}}\) satisfy Definition~\ref{def:local}.
 Suppose its lowest \(d\) states in the all-LLL sector
 \((n_\up,n_\dn)\) satisfy Assumption~\ref{ass:band}, with
-width bound \(w\), gap bound \(\gamma>2w\), and projection \(P\).
-Assume either
-\begin{enumerate}
-\item it is a positive parent of Definition~\ref{def:parent}
-and \(E_1=0\); or
-\item \(n_\sigma\le(1-\epsilon)M\) for both spins, with
-a fixed \(\epsilon>0\).
-\end{enumerate}
-More generally, any uniform removal bound as in
-Lemma~\ref{lem:generalcomparison} suffices.
-Choose \(\mu>C_{\mathrm{rem}}+w+\gamma\), with \(C_{\mathrm{rem}}=0\)
-in the first case and \(C_{\mathrm{rem}}=C_\epsilon\) in the
-second.  Then:
+width bound \(w\), gap bound \(\gamma>w\), and projection \(P\).
+Assume \(n_\sigma\le(1-\epsilon)M\) for both spins, with
+a fixed \(\epsilon>0\), so Lemma~\ref{lem:removal} gives
+\(C_{\mathrm{rem}}=C_\epsilon\).
+More generally, this filling restriction may be replaced by any
+uniform removal bound as in Lemma~\ref{lem:generalcomparison}.
+Choose \(\mu>C_{\mathrm{rem}}+w+\gamma\).  Then:
 \begin{enumerate}
 \item The ambient dynamics generated by \(H_b\) has a
 size-independent Lieb--Robinson bound for bounded local even
@@ -642,14 +620,15 @@ The proofs are given in Appendices~\ref{app:locality} and
 Local approximants to \(k_R\), and to the currents, preserve both
 particle numbers.  A spectral filter applied to these operators
 therefore connects states only inside \(\HH_{\bm n}\).  The gap
-\(\Delta=\gamma>2w\) above this band, retained by
+\(\Delta=\gamma>w\) above this band, retained by
 Lemma~\ref{lem:generalcomparison}, is sufficient, even though
 no grand-canonical gap is assumed.  The commutator
 and propagation estimates use the polynomial bounds in
 Definition~\ref{def:local}, with no positivity requirement.
 The inverse-energy filter handles transitions between the band and
 its complement.  The clustering filter is zero on all intraband
-energy differences, which have magnitude at most \(w<\Delta/2\).
+energy differences, which have magnitude at most \(w<\Delta\).
+Its transition interval lies strictly between \(-\Delta\) and \(-w\).
 The projection identities are therefore exact even when the
 levels inside \(P\) are split; neither equality of their energies
 nor a vanishing band width is used.
@@ -723,6 +702,8 @@ divisibility
  \qquad\text{equivalently}\qquad
  \frac{M}{\gcd(M,n_\up,n_\dn)}\mid d.
 \end{equation}
+If a spin filling \(n_\sigma/M\) converges, it equals its limit
+exactly for all sufficiently large sizes.
 \end{theorem}
 \begin{proof}
 Proposition~\ref{prop:analytic} and the exact transport calculation
@@ -740,6 +721,9 @@ distance at least \(1/M\) from the integers.  Since \(M=O(L^2)\),
 this is incompatible with \eqref{eq:filling} for large \(L\).
 The equivalent greatest-common-divisor formulation follows from
 B\'ezout's identity applied to \(M,n_\up,n_\dn\).
+Moreover, since \(0\le n_\sigma\le M\), the spin filling eventually
+belongs to the finite set \(\{0,1/d,\ldots,1\}\).  A convergent
+sequence in this set is eventually equal to its limit.
 \end{proof}
 
 \subsection{Rational fillings and the parity distinction}
@@ -759,8 +743,9 @@ In particular, the conclusion holds when the two rational
 fillings are exactly fixed at every size.
 \end{corollary}
 \begin{proof}
-Taking the limit of \eqref{eq:filling}, the fixed number
-\(d\nu_\sigma\) is an integer.  Coprimality gives
+The eventual equality \(n_\sigma/M=\nu_\sigma\) and
+\eqref{eq:finiteinteger} give \(d\nu_\sigma\in\mathbb Z\).
+Coprimality gives
 \(b_\sigma\mid d\) for each spin, and hence the asserted
 least common multiple.  The two constraints do not in general
 multiply: when the spin fillings coincide, they are the same
@@ -803,8 +788,8 @@ automatic for all large sizes.  Thus this corollary applies to
 general local LLL field polynomials with an isolated low-energy
 band satisfying Assumption~\ref{ass:band}, at any lowest energy
 and with possible splitting inside the band.  At the endpoint \(\nu=2\),
-the positive-parent comparison or another uniform removal bound
-is the available hypothesis for this argument.
+a separately verified uniform removal bound is required for
+this enlargement argument.
 
 The parity distinction can equivalently be organized by the
 denominator of the total filling:
@@ -844,10 +829,8 @@ take an even multiple of \(q\) flux quanta to have even \(N\).
 This finite-size restriction does not supply another factor in
 the low-energy band rank.  The limiting-filling formulation
 does not assume exact rational filling at each finite size.
-Under the band hypotheses, \eqref{eq:finiteinteger} implies that each
-spin filling belongs eventually to the finite set
-\(\{0,1/d,\ldots,1\}\); convergence then forces it to equal its
-limit for all sufficiently large sizes.
+Under the band hypotheses, Theorem~\ref{thm:filling} shows that
+convergence of a spin filling forces eventual equality to its limit.
 \end{remark}
 
 \subsection{Comparison with exact translation degeneracy}
@@ -856,13 +839,13 @@ limit for all sufficiently large sizes.
 For this comparison, impose symmetry also under the common
 \(y\)-translation.  The additional one-particle unitary is
 \[
- (t_yf)(x,y)=f(x,y-\eta),\qquad \eta=L_y/M.
+ (t_yf)(x,y)=f(x,y-\delta_y),\qquad \delta_y=L_y/M.
 \]
-It respects \eqref{eq:bc} because \(L_x\eta=2\pi\), and it
+It respects \eqref{eq:bc} because \(L_x\delta_y=2\pi\), and it
 commutes with the covariant derivatives and \(\Pi\).
 Direct substitution gives
 \[
- t_xt_y=e^{\ii\delta\eta}t_yt_x
+ t_xt_y=e^{\ii\delta\delta_y}t_yt_x
         =e^{2\pi\ii/M}t_yt_x.
 \]
 Set \(\mathcal T_\alpha=\Gamma_{\mathrm a}
@@ -916,19 +899,7 @@ At balanced exact filling, \(b_L=b_\nu\), so the gain is
 in this divisibility constraint for even \(p\).
 For a fully polarized sector, say \(n_\dn=0\), one has
 \(b_L=q_L\) as well.
-\[
-\begin{array}{c|c|c}
- \nu\text{ (balanced)}
- &\text{exact symmetry divisor }q
- &\text{gapped index divisor }b_\nu\\ \hline
- 1/2&2&4\\
- 1/3&3&6\\
- 2/3&3&3\\
- 2/5&5&5\\
- 3/4&4&8\\
- 1&1&2
-\end{array}
-\]
+
 The proof of Proposition~\ref{prop:COM} is included here so that
 this comparison does not require a result from the cited paper.
 The two conclusions concern different spectral objects: the
@@ -945,6 +916,85 @@ Alternatively, a spin symmetry gives precisely the trace
 identity needed for the full low-energy band, without requiring
 every vector in it to be a singlet.
 
+\begin{corollary}[Spin-resolved band]\label{cor:spinresolved}
+Let \(H_{\mathrm{LLL}}\) satisfy Definition~\ref{def:local} and
+be invariant under common magnetic translation.  In the full
+all-LLL sector of total number \(N\), suppose its lowest \(d\)
+states satisfy Assumption~\ref{ass:band}, with projection \(P\).
+Assume \(N\le(2-\epsilon)M\) for a fixed \(\epsilon>0\), or
+more generally the uniform removal bound \eqref{eq:removaltotal}.
+No spin-exchange symmetry is required.
+Since \(P\) commutes with \(N_\up\),
+write
+\[
+ P=\sum_{n_\up+n_\dn=N}P_{\bm n},\qquad
+ P_{\bm n}=P\,\one_{\{n_\up\}}(N_\up),\qquad
+ d_{\bm n}=\operatorname{rank}P_{\bm n}.
+\]
+Then, for all sufficiently large tori, every sector with
+\(d_{\bm n}>0\) satisfies
+\begin{equation}\label{eq:spinresolved}
+ M\mid d_{\bm n}n_\up,\qquad M\mid d_{\bm n}n_\dn,
+ \qquad\text{equivalently}\qquad
+ \frac{M}{\gcd(M,n_\up,n_\dn)}\mid d_{\bm n}.
+\end{equation}
+In particular, \(d_{\bm n}=0\) whenever
+\(0<\abs{n_\up-n_\dn}<M/d\).
+\end{corollary}
+\begin{proof}
+Let \(E_1\le E_2\le\cdots\) be the energies of the fixed-\(N\)
+all-LLL sector, with band
+constants \(w\) and \(\gamma>w\), and let \(C_{\mathrm{rem}}\) be
+the constant in \eqref{eq:removaltotal}.  Under the filling
+restriction \(C_{\mathrm{rem}}=C_\epsilon\).
+
+Every monomial of \(H_{\mathrm{LLL}}\) is neutral in each spin, so
+\(H_{\mathrm{LLL}}\) is reduced by the fixed-spin parts of the
+all-LLL fixed-\(N\) sector.  Hence \(P\) commutes with \(N_\up\),
+and \(P_{\bm n}\) is the spectral projection of
+\(H_{\mathrm{LLL}}\) on the all-LLL part of \(\HH_{\bm n}\) for the
+interval \([E_1,E_d]\).  All other eigenvalues in that part are at
+least \(E_{d+1}\).
+
+Fix a sector with \(d_{\bm n}>0\).  Its lowest energy
+\(E_0(\bm n)\) lies in \([E_1,E_d]\), so \(P_{\bm n}\) projects onto
+its lowest \(d_{\bm n}\) states.  Their width is at most
+\(E_d-E_1\le w\), and the next eigenvalue in the sector is at least
+\(E_{d+1}\ge E_d+\gamma\).  Thus Assumption~\ref{ass:band} holds in
+this sector, with rank \(d_{\bm n}\) and the same \(w\) and
+\(\gamma\).  The sector also has a uniform fixed-spin removal
+bound.  For \(0\le\bm r\le\bm n\) with \(\abs{\bm r}\ge1\), the
+population \(\bm n-\bm r\) has total number \(N-\abs{\bm r}\), so
+\eqref{eq:removaltotal} and \(E_0(\bm n)\le E_d\le E_1+w\) give
+\[
+ E_0(\bm n-\bm r)\ge E_{\mathrm{tot}}(N-\abs{\bm r})
+ \ge E_1-C_{\mathrm{rem}}\abs{\bm r}
+ \ge E_0(\bm n)-(C_{\mathrm{rem}}+w)\abs{\bm r}.
+\]
+This is \eqref{eq:removalspin} with \(C_{\mathrm{rem}}+w\) in place
+of \(C_\epsilon\).  It is needed because a spin sector inside the
+fixed-\(N\) sector may be close to spin saturation, where
+Lemma~\ref{lem:removal} gives no fixed-spin bound.
+
+Suppose the first assertion fails for infinitely many sizes.  For
+each such size choose a sector \(\bm n(L)\) with
+\(d_{\bm n(L)}>0\) that violates \eqref{eq:spinresolved}.  Since
+\(1\le d_{\bm n(L)}\le d\), a further subsequence has constant rank
+\(d'\).  Along it, the previous paragraph verifies the hypotheses of
+Proposition~\ref{prop:analytic}, in its form with a uniform removal
+bound, for the sectors \(\bm n(L)\) and projections
+\(P_{\bm n(L)}\); invariance under common magnetic translation is
+assumed.  Theorem~\ref{thm:filling}, applied along this subsequence,
+gives \(M\mid d'n_\up(L)\) and \(M\mid d'n_\dn(L)\) for all large
+sizes in it, a contradiction.  The greatest-common-divisor form is
+the equivalence in \eqref{eq:finiteinteger}.
+
+Finally, \(\gcd(M,n_\up,n_\dn)\) divides \(n_\up-n_\dn\).  If
+\(d_{\bm n}>0\) and \(n_\up\ne n_\dn\), then \eqref{eq:spinresolved}
+gives
+\(M/\abs{n_\up-n_\dn}\le M/\gcd(M,n_\up,n_\dn)\le d_{\bm n}\le d\).
+\end{proof}
+
 \begin{theorem}[Spin-symmetric fixed-total-number version]
 \label{thm:spinexchange}
 Let the Hamiltonians of Definition~\ref{def:local} be invariant
@@ -952,22 +1002,21 @@ under common magnetic translation.  In the full all-LLL sector
 of fixed total particle number \(N=N_\up+N_\dn\), suppose
 the lowest \(d\) states satisfy Assumption~\ref{ass:band}:
 \(d\) is fixed, their width is at most \(w\), and the gap above
-them is at least \(\gamma>2w\).  Let \(P\) be the spectral
+them is at least \(\gamma>w\).  Let \(P\) be the spectral
 projection onto this band, including all its spin sectors.
-Assume also either that the Hamiltonian is
-a positive parent with \(E_1=0\), or that
-\(N\le(2-\epsilon)M\) for a fixed \(\epsilon>0\).
-More generally, a uniform bound of the form
-\eqref{eq:removaltotal} suffices in place of these alternatives.
-Assume an ambient unitary \(R\) exchanges the two spin numbers
+Assume also \(N\le(2-\epsilon)M\) for a fixed \(\epsilon>0\).
+More generally, this filling restriction may be replaced by a
+uniform bound of the form \eqref{eq:removaltotal}, with a
+size-independent constant \(C_{\mathrm{rem}}\).
+Assume an ambient unitary \(\mathcal R\) exchanges the two spin numbers
 and preserves the penalty:
 \[
- [R,H_{\mathrm{LLL}}]=0,\qquad
- \left[R,\sum_\sigma\dG_\sigma(1-\Pi)\right]=0,
+ [\mathcal R,H_{\mathrm{LLL}}]=0,\qquad
+ \left[\mathcal R,\sum_\sigma\dG_\sigma(1-\Pi)\right]=0,
 \]
 \[
- R^\dagger N_\up R=N_\dn,\qquad
- R^\dagger N_\dn R=N_\up.
+ \mathcal R^\dagger N_\up \mathcal R=N_\dn,\qquad
+ \mathcal R^\dagger N_\dn \mathcal R=N_\up.
 \]
 Then
 \begin{equation}\label{eq:spintracefilling}
@@ -981,55 +1030,32 @@ this full low-energy band rank.  Charge conservation and
 and exchange assumptions used here.
 \end{theorem}
 \begin{proof}
-The index proof and its analytical input apply on
+Corollary~\ref{cor:spinresolved} gives, for all sufficiently large
+sizes,
 \[
- \HH_N=\{\psi:(N_\up+N_\dn)\psi=N\psi\}
+ \frac1M\Tr(PN_\up)
+   =\sum_{\bm n}\frac{d_{\bm n}n_\up}{M}\in\mathbb Z.
 \]
-in place of \(\HH_{\bm n}\).  To verify this extension, note
-that all local interaction terms, currents, dressings, and
-unitaries used in the proof are neutral and thus preserve
-\(\HH_N\).  The physical charges obey \(0\le Q_X\le N\)
-on this sector, so every polynomial norm estimate still holds.
-Use the total-number version of Lemma~\ref{lem:generalcomparison}
-and choose \(\mu>C_{\mathrm{rem}}+w+\gamma\).
-The enlarged Hamiltonian has the same lowest \(d\) states,
-with their original energies and projection \(P\), and a gap
-at least \(\Delta=\gamma>2w\) above them in \(\HH_N\).
-This gives the same spectral-filter identities and clustering
-estimates, including when the band is split.  In particular,
-the filter does not need a gap to states in different total-number
-sectors.  In the partial-filling case, the energy comparison uses
-only the variational bounds of Lemma~\ref{lem:removal} in those
-other sectors; the positive-parent case uses their nonnegative
-energies directly.
-
-The only step of Theorem~\ref{thm:filling} that used a definite
-spin number was its final trace evaluation.  The strip partition
-now gives, instead,
-\[
- M\Tr(PQ_{S_-^0})=\Tr(PN_\up),\qquad
- \Tr(PT_-)=-\frac1M\Tr(PN_\up).
-\]
-The index theorem makes this last quantity an integer up to
-\(O(L^{-\infty})\).  The two commutation assumptions on \(R\)
-imply \([R,H_{\mathrm{ext}}]=0\), and spin exchange preserves
-the fixed-total-number sector.  The gap comparison identifies
-\(P\) with the spectral projection onto the whole low-energy
-band of \(H_{\mathrm{ext}}\) in that sector; hence
-\(R^\dagger PR=P\).
-Cyclicity and the exchange symmetry give
+Choose \(\mu>C_{\mathrm{rem}}+w+\gamma\) and apply the total-number
+comparison in Lemma~\ref{lem:generalcomparison}.  It identifies
+\(P\) with the low-energy spectral projection of
+\(H_{\mathrm{ext}}\) in
+\(\HH_N=\{\psi:(N_\up+N_\dn)\psi=N\psi\}\).
+The two commutation assumptions on \(\mathcal R\) imply
+\([\mathcal R,H_{\mathrm{ext}}]=0\), and spin exchange preserves
+\(\HH_N\).  Consequently \(\mathcal R^\dagger PR=P\), and cyclicity gives
 \[
  \Tr(PN_\up)=\Tr(PN_\dn),\qquad
  \Tr\bigl(P(N_\up+N_\dn)\bigr)=dN.
 \]
-Consequently each spin trace is \(dN/2\), proving
-\eqref{eq:spintracefilling}.  Its left side is either zero or
-at least \(1/(2M)\), which proves the exact eventual divisibility.
-The same arithmetic as in
-Corollary~\ref{cor:rational} proves the divisibility statement.
+Each spin trace is therefore \(dN/2\), so \(dN/(2M)\) is an
+integer for all sufficiently large sizes.  This proves
+\eqref{eq:spintracefilling} and \(2M\mid dN\).
+If \(N/M\to p/q\), taking the limit gives \(dp/(2q)\in\mathbb Z\),
+and the arithmetic of Corollary~\ref{cor:rational} gives \(b_\nu\mid d\).
 For an \(\mathrm{SU}(2)\)-invariant Hamiltonian, the second
 quantization of a rotation by \(\pi\) about the spin \(x\)-axis
-supplies \(R\).  It acts only on spin, so it commutes with the
+supplies \(\mathcal R\).  It acts only on spin, so it commutes with the
 spin-independent penalty.  Conservation of \(N\) and \(S^z\)
 gives conservation of both spin numbers.
 \end{proof}
@@ -1040,13 +1066,89 @@ means the filling in the normalized band trace:
  \frac{\Tr(PN_\sigma)}{dM}=\frac{N}{2M}.
 \]
 It need not hold as a sharp particle number in each vector
-in the band.  No evenness assumption on \(N\) is needed here;
-if exact filling is imposed, \(M=qk\), \(N=pk\) suffices.
+in the band, and no evenness assumption on \(N\) is made; if exact
+filling is imposed, \(M=qk\), \(N=pk\) suffices.
 By contrast, Corollary~\ref{cor:rational} concerns the balanced
-sector alone and requires a gap only within that sector.  The
-two ranks agree when the same low-energy interval is used and
-every state in the full fixed-\(N\) band is a singlet, but should
-otherwise be distinguished.
+sector alone and requires a gap only within that sector.  The two
+ranks agree when the full fixed-\(N\) band lies in the balanced
+sector.  Corollary~\ref{cor:spinresolved} shows that a band of
+bounded rank can leave the balanced sector only through sectors
+with \(\abs{n_\up-n_\dn}\ge M/d\).  Corollary~\ref{cor:singlet}
+shows that with \(\mathrm{SU}(2)\) symmetry it does not leave it at
+all on large tori; in particular \(N\) is then even.
+
+
+\begin{corollary}[Spin-singlet bands]\label{cor:singlet}
+In Theorem~\ref{thm:spinexchange}, suppose \(H_{\mathrm{LLL}}\) is
+\(\mathrm{SU}(2)\)-invariant.  Then, for all sufficiently large tori,
+every vector in \(\Ran P\) has total spin zero.  In particular
+\(N\) is even, \(\Ran P\) lies in the balanced sector
+\(n_\up=n_\dn=N/2\), and \(P\) is the low-energy band projection of
+that sector for the same energy window, with the same rank, width
+bound, and gap.
+\end{corollary}
+\begin{proof}
+The total spin operators
+\(\bm S=\dG(1_{\mathfrak h}\otimes\bm\sigma/2)\) commute with
+\(H_{\mathrm{LLL}}\) and preserve the all-LLL fixed-\(N\) sector, so
+they commute with its spectral projection \(P\).  Thus \(\Ran P\) is
+a finite-dimensional \(\mathrm{SU}(2)\)-representation and splits
+into irreducible multiplets.  Suppose one of them has spin
+\(S\ge1/2\).  It contains a vector with \(S^z=1\) if \(S\) is an
+integer, and with \(S^z=1/2\) otherwise.  Since
+\(2S^z=N_\up-N_\dn\), some sector with
+\(n_\up-n_\dn\in\{1,2\}\) has \(d_{\bm n}>0\).  Once \(M>2d\), this
+contradicts the last assertion of Corollary~\ref{cor:spinresolved}.
+Hence every multiplet in \(\Ran P\) is a singlet.  A singlet has
+\(S^z=0\), so it lies in the sector \(n_\up=n_\dn=N/2\).
+
+In that sector, \(\Ran P\) contains every state of energy at most
+\(E_d\), and the remaining states have energy at least
+\(E_{d+1}\).  So \(P\) is the band projection of the balanced
+sector, with the same constants.
+\end{proof}
+
+Under the full-sector band hypotheses and \(\mathrm{SU}(2)\) symmetry,
+therefore, the fixed-total-number band and the balanced-sector band of Corollary~\ref{cor:rational}
+coincide on large tori.  The distinction between the two
+formulations matters only for spin-exchange symmetry without full
+\(\mathrm{SU}(2)\), where Corollary~\ref{cor:spinresolved} still
+allows extensively polarized sectors with
+\(\abs{n_\up-n_\dn}\ge M/d\).
+
+\begin{corollary}[Non-singlet low-energy states]\label{cor:nonsinglet}
+Let \(H_{\mathrm{LLL}}\) satisfy Definition~\ref{def:local}, and let
+it be \(\mathrm{SU}(2)\)-invariant and invariant under common
+magnetic translation.  In the all-LLL sectors of total number \(N\),
+assume \(N\le(2-\epsilon)M\) for a fixed \(\epsilon>0\), or a
+uniform bound of the form \eqref{eq:removaltotal}.  Fix \(d\), and
+suppose \(w_L=E_d(L)-E_1(L)\to0\).  Suppose also that, for all
+sufficiently large tori, \(\bm S^2\) does not vanish on the spectral
+subspace of eigenvalues at most \(E_d(L)\).  Then
+\[
+ E_{d+1}(L)-E_d(L)\longrightarrow0.
+\]
+\end{corollary}
+\begin{proof}
+Otherwise some subsequence has \(E_{d+1}-E_d\ge\gamma_0>0\).
+Choose a fixed \(w<\gamma_0\) bounding \(w_L\) eventually along
+it.  Assumption~\ref{ass:band} then holds there, and \(P\) is the
+spectral projection for eigenvalues at most \(E_d\).  The
+\(\mathrm{SU}(2)\) symmetry supplies the exchange unitary of
+Theorem~\ref{thm:spinexchange}.  Corollary~\ref{cor:singlet},
+applied along the subsequence, gives \(\bm S^2P=0\) for large sizes,
+a contradiction.
+\end{proof}
+
+For example, an exactly degenerate lowest multiplet of spin
+\(S\ge1/2\) has \(d=2S+1\) and \(w_L=0\); if \(S\) stays bounded,
+the gap above it closes.  For odd \(N\) every state has
+half-integer spin, so an \(\mathrm{SU}(2)\)-invariant Hamiltonian in
+this class has no uniformly gapped low-energy band of bounded rank
+at odd particle number.  This is analogous to a
+Lieb--Schultz--Mattis statement.  It does not apply to a fully
+polarized lowest multiplet with \(S=N/2\), whose dimension \(N+1\)
+is unbounded.
 
 \subsection{Special cases and the gap obstruction}
 
@@ -1059,34 +1161,44 @@ Theorem~\ref{thm:spinexchange} imply \(4\mid d\).
 Here \(p=1\), \(q=2\), and hence \(b_\nu=4\).
 \end{proof}
 
-\begin{corollary}[Obstruction for a collapsing low-energy band]
-\label{cor:gapobstruction}
+\begin{corollary}[Band-gap obstruction]\label{cor:gapobstruction}
 Fix a rational limiting filling \(\nu=p/q\) and either the
 balanced-sector or the full spin-exchange-symmetric setting.
 Retain the locality, symmetry, and uniform energy-comparison
 hypotheses, but do not assume a uniform spectral gap.
-Suppose for a fixed \(d\) that
-\[
- w_L=E_d(L)-E_1(L)\longrightarrow0,\qquad b_\nu\nmid d.
-\]
-Then
+For a fixed \(d\) with \(b_\nu\nmid d\), suppose the widths
+\(w_L=E_d(L)-E_1(L)\) are uniformly bounded, and write
+\(\gamma_L=E_{d+1}(L)-E_d(L)\).  Then
+\begin{equation}\label{eq:gapwidthobstruction}
+ \limsup_{L\to\infty}(\gamma_L-w_L)\le0.
+\end{equation}
+In particular, if \(w_L\to0\), then
 \begin{equation}\label{eq:gapobstruction}
  E_{d+1}(L)-E_d(L)\longrightarrow0,
  \qquad E_{d+1}(L)-E_1(L)\longrightarrow0.
 \end{equation}
 \end{corollary}
 \begin{proof}
-If the first limit failed, some subsequence would have
-\(E_{d+1}-E_d\ge\gamma_0>0\).  Since \(w_L\to0\),
-choose a fixed \(w<\gamma_0/2\) bounding \(w_L\) eventually
-along that subsequence.  Assumption~\ref{ass:band} then holds
-there, and the corresponding divisibility theorem gives
-\(b_\nu\mid d\), a contradiction.  Adding \(w_L\to0\)
-gives the second limit.
+If \eqref{eq:gapwidthobstruction} failed, some subsequence would
+satisfy \(\gamma_L-w_L\ge\delta>0\).  By boundedness, pass to a
+further subsequence with \(w_L\to w_*\ge0\).  Eventually on it,
+\[
+ w_L\le w_*+\delta/4=:w,\qquad
+ \gamma_L\ge w_*+3\delta/4\ge\gamma:=w_*+\delta/2>w.
+\]
+Assumption~\ref{ass:band} then holds with fixed constants, and
+the corresponding divisibility theorem gives \(b_\nu\mid d\),
+a contradiction.  If \(w_L\to0\), nonnegativity of
+\(\gamma_L\) gives \(\gamma_L\to0\).  Adding \(w_L\) proves
+the second limit in \eqref{eq:gapobstruction}.
 \end{proof}
 
-For a positive parent at balanced half filling, exactly ten
-zero modes give \(d=10\), \(w_L=0\), and hence \(E_{11}(L)\to0\).
+At balanced half filling, a Hamiltonian in the stated class with
+exactly ten ground states at any common energy \(E_1(L)\) has
+\(d=10\), \(w_L=0\), and hence \(E_{11}(L)-E_1(L)\to0\).
+For zero-energy ground states this reads \(E_{11}(L)\to0\).  The partial-filling estimate
+supplies the removal bound without any sign assumption on the
+interaction in other particle-number sectors.
 The same obstruction applies to a proposed rank-ten band with
 exponentially small, or merely vanishing, splitting.  Spectral
 counting is a separate input; no assertion about that count is
@@ -1114,36 +1226,17 @@ The distinction for even \(p\) is necessary even for a
 spin-singlet ground state.  For example, at \(\nu=2\) the
 two spin components of the LLL are completely filled.  The
 all-LLL sector with \(N=2M\) is one-dimensional and its filled
-state is a spin singlet.  Take the allowed positive parent
-\(H_{\mathrm{LLL}}=0\); after the enlargement its Hamiltonian
+state is a spin singlet.  Take \(H_{\mathrm{LLL}}=0\), which
+belongs to Definition~\ref{def:local}.  All particle-number
+sectors then have lowest energy zero, verifying the removal
+bound directly with \(C_{\mathrm{rem}}=0\) even at saturation.
+After the enlargement its Hamiltonian
 is \(\mu\sum_\sigma\dG_\sigma(1-\Pi)\), with this unique
 ground state and gap \(\mu\) at fixed \(N\).  The all-LLL
 sector itself has no orthogonal states.  Thus a universal
 claim \(2q\mid d\) would already fail at \(p=2,q=1,d=1\),
 whereas \eqref{eq:generaldivisor} gives the correct divisor one.
 
-\subsection{A spin-triplet derivative parent}
-
-A concrete parent in the class is specified by
-\[
- \psi_\sigma(R)=a_\sigma(e_R),\qquad
- \eta_\sigma(R)=a_\sigma(g_R),
-\]
-\begin{align*}
- B_+(R)&=\psi_\up(R)\eta_\up(R),\\
- B_-(R)&=\psi_\dn(R)\eta_\dn(R),\\
- B_0(R)&=2^{-1/2}\bigl(
-       \psi_\dn(R)\eta_\up(R)+\psi_\up(R)\eta_\dn(R)\bigr),\\
- H_{\mathrm{trip}}&=8\pi\int_{\TT_L}
-       \bigl(B_+^\dagger B_++B_0^\dagger B_0+B_-^\dagger B_-\bigr)\dd R.
-\end{align*}
-The positive normalization is immaterial for the index.  Each
-summand preserves the two spin numbers and is covariant under
-common magnetic translation.  The coefficients select a
-spin-triplet pair and its first relative derivative at coincidence.
-All the hypotheses on the interaction follow directly from
-\eqref{eq:tails}; a gap above the proposed low-energy sector
-is assumed only for the contradiction argument.
 
 \section{Proof of the index theorem}\label{sec:proof}
 
@@ -1319,7 +1412,11 @@ Assumption~\ref{ass:index} and \eqref{eq:Vpreserve}.
 After compression and replacement by their polar unitaries
 (Lemma~\ref{lem:polar}), the right-hand side is a commutator
 of two \(d\)-dimensional unitaries, up to \(\epsL\).
-Its determinant is therefore \(1+\epsL\).
+Its determinant is therefore \(1+\epsL\).  This is the same
+finite-dimensional determinant identity used in
+Proposition~\ref{prop:COM}; here the second unitary is the
+dressed spin-charge rotation \(V\), rather than the common
+translation \(\mathcal T_y\).
 Equation~\eqref{eq:detformula} implies
 \[
  e^{2\pi\ii\Tr(PT_-)}=1+\epsL.
@@ -1613,14 +1710,12 @@ Let \(\Delta=\min\{\gamma,\mu-C_{\mathrm{rem}}-w\}\) be the
 lower bound on the gap above the band from
 Lemma~\ref{lem:generalcomparison}.  The choice
 \(\mu>C_{\mathrm{rem}}+w+\gamma\) in
-Proposition~\ref{prop:analytic} gives \(\Delta=\gamma>2w\).
-For a positive parent with lowest energy zero,
-\(C_{\mathrm{rem}}=0\).  On the selected number sector,
+Proposition~\ref{prop:analytic} gives \(\Delta=\gamma>w\).
+On the selected number sector,
 \(H_b\) has the same band projection, width, and gap, with
 band energies in \([E_1-\mu N,E_d-\mu N]\).
-Choose a real smooth even function \(\chi\) equal to one
-on a neighborhood of \([-w,w]\) and zero for
-\(\abs\omega\ge\Delta\).
+Choose a real smooth even function \(\chi\) equal to one near
+zero and zero for \(\abs\omega\ge\Delta\).
 With Fourier convention
 \(\widehat W(\omega)=\int W(t)e^{\ii t\omega}\dd t\), choose
 \[
@@ -1667,10 +1762,9 @@ The two off-diagonal blocks relative to \(P\) therefore give
 \end{equation}
 This can equivalently be checked using spectral measures;
 no finite-dimensionality of the enlarged sector is required.
-The energy differences inside the band lie in \([-w,w]\),
-where \(\widehat W=0\).  Their individual values do not enter
-\eqref{eq:dressingexact}, which only concerns the two
-off-diagonal blocks relative to \(P\).
+Only the two off-diagonal blocks relative to \(P\) enter this
+identity.  The inverse-energy filter itself requires only
+\(\Delta>0\), with no restriction on the band width.
 
 To localize \(K_\pm^\infty\), approximate \(J_\pm\) in a strip
 of radius \(r/4\), use the restricted dynamics in a strip of
@@ -1698,7 +1792,7 @@ We give a filter proof that uses a gap only in the selected
 sector.  Choose \(\vartheta\in C^\infty(\mathbb R)\) with
 \[
  \vartheta(\omega)=1\quad(\omega\le-\Delta),\qquad
- \vartheta(\omega)=0\quad(\omega\ge-\Delta/2).
+ \vartheta(\omega)=0\quad\bigl(\omega\ge-(w+\Delta)/2\bigr).
 \]
 For a bounded neutral local \(A\), write
 \(A_{\vartheta}=\vartheta(\ad_{H_b})A\).  This is unambiguous in finite volume:
@@ -1711,7 +1805,8 @@ eigenvalues.  If \(H_b=\sum_\lambda\lambda E_\lambda\), set
 \]
 For matrix elements within \(\Ran P\), the energy difference
 belongs to \([-w,w]\), where \(\vartheta=0\) because
-\(w<\Delta/2\).  For a matrix element with output in
+\(w<\Delta\) implies \(-w>-(w+\Delta)/2\).
+For a matrix element with output in
 \(\Ran P\) and input in its complement, the energy difference
 is at most \(-\Delta\), where \(\vartheta=1\).  For the
 reverse matrix element it is at least \(\Delta\), where
@@ -1732,18 +1827,18 @@ For clarity, the distributional Fourier representation of
 this filter introduces no norm singularity into the commutator.
 Since \(\vartheta'\) is smooth and compactly supported, the inverse
 transform of \(\vartheta\) is a multiple of \(\delta(t)\) plus
-\(b(t)/t\) in principal value, with \(b\) a Schwartz function.
+\(\beta(t)/t\) in principal value, with \(\beta\) a Schwartz function.
 For disjoint supports the delta term vanishes in
 \([A_{\vartheta},B]\), and the integral at \(t=0\) converges because
 \eqref{eq:LR} contains \(e^{v\abs t}-1=O(\abs t)\).
 
-Let \(s=d(X,Y)\).  Split this integral at \(\abs t=\eta s\),
-where \(v\eta<a/2\).  The short-time contribution is bounded
+Let \(s=d(X,Y)\).  Split this integral at \(\abs t=c_{\mathrm t} s\),
+where \(vc_{\mathrm t}<a/2\).  The short-time contribution is bounded
 by an exponentially small quantity times
 \(\norm A\norm B|X||Y|\), using \eqref{eq:LR}.
 For the long-time contribution use
 \(\norm{[\tau_t(A),B]}\le2\norm A\norm B\) and the rapid
-decay of \(b(t)/t\).  Thus, for every \(m\),
+decay of \(\beta(t)/t\).  Thus, for every \(m\),
 \begin{equation}\label{eq:clusterbound}
  \norm{PA(1-P)BP}
  \le C_m\norm A\norm B\,|X||Y|(1+s)^{-m}.
