@@ -368,6 +368,40 @@ This is a sufficient subclass, not a restriction on the general density.
 The locality assumption concerns physical space; no equivalence with
 locality in an orbital or slot embedding is asserted.
 
+The class also includes projected two-body potentials with uniformly
+integrable, rapidly decaying tails.  For example, let \(\mathcal V_L\) be a
+real even potential on the torus with
+\[
+ \sup_L\int_{\TT_L}(1+d(0,S))^k|\mathcal V_L(S)|\dd S<\infty
+ \qquad\text{for every }k\ge0.
+\]
+Periodizing a real even potential on \(\mathbb R^2\) with all
+weighted \(L^1\) moments gives such a family.  Define
+\[
+ h_R=\frac12\sum_{\sigma,\sigma'}\int_{\TT_L}\mathcal V_L(R-S)
+ a_\sigma^\dagger(e_R)a_{\sigma'}^\dagger(e_S)
+ a_{\sigma'}(e_S)a_\sigma(e_R)\dd S.
+\]
+The CAR give \(\norm{h_R}\le C\norm{\mathcal V_L}_1\).  To obtain an
+approximant supported in \(B_r(R)\), retain only centers with
+\(d(R,S)\le r/2\) and restrict both test vectors to \(B_r(R)\);
+once that ball covers the torus, take the exact density instead.
+Each retained monomial is of the form \(B^\dagger B\), so real
+coefficients preserve self-adjointness, and neutrality is automatic.
+The Gaussian field tails and a telescopic product estimate give
+\[
+ \norm{h_R-h_R^{(r)}}\le
+ C\int_{d(0,S)>r/2}|\mathcal V_L(S)|\dd S
+       +Ce^{-cr^2}\norm{\mathcal V_L}_1.
+\]
+This proves \eqref{eq:happrox}.  This sufficient condition does not
+cover the bare Coulomb potential \(V(S)\propto |S|^{-1}\) in two
+spatial dimensions: its large-distance \(L^1\) norm is not uniform
+in volume.  An integrable potential with
+an algebraic tail \(|V(S)|\sim |S|^{-\alpha}\), \(\alpha>2\),
+gives only a bound of order \(r^{2-\alpha}\) by this construction.
+No extension to a fixed algebraic decay rate is claimed here.
+
 \begin{assumption}[Isolated low-energy band]\label{ass:band}
 In the selected all-LLL number sector, list the eigenvalues of
 \(H_{\mathrm{LLL}}\) as \(E_1(L)\le E_2(L)\le\cdots\), counted
@@ -491,9 +525,16 @@ satisfy Assumption~\ref{ass:band}, with projection \(P\).
 Use \(\mu_M\) from \eqref{eq:penalty} and \(H_b\) from
 \eqref{eq:Hb}.  Then:
 \begin{enumerate}
-\item For any fixed macroscopic buffer, \(\tau_t^{H_b}\) on neutral
-observables has neutral local approximations with relative ambient error
-\(O(L^{-\infty})\), uniformly for \(|t|\le L^{1/3}\).
+\item For every fixed \(\eta>0\) and bounded even ambient operator
+\(A\) supported in \(X\), there are approximants \(A_{t,\eta}\)
+supported in the physical \(2\eta L\)-neighborhood of \(X\), with
+\[
+ \sup_{|t|\le L^{1/3}}\norm{\tau_t^{H_b}(A)-A_{t,\eta}}
+       \le\norm A\,O(L^{-\infty}),\qquad
+ \norm{A_{t,\eta}}=\norm A.
+\]
+The constants are uniform in \(X,A,t\).  The approximation preserves
+adjoints and is neutral whenever \(A\) is neutral.
 In particular, bounded even observables separated by a distance
 proportional to \(L\) have commutator bounded by the product of
 their norms times \(O(L^{-\infty})\) on this time interval.
@@ -518,7 +559,10 @@ supported in \(S_-,S_+\).
 \end{proposition}
 \begin{proof}
 Appendices~\ref{app:locality} and \ref{app:filters} prove these
-statements.  Lemma~\ref{lem:generalcomparison} preserves the band
+statements.  For the first assertion, use Lemma~\ref{lem:macro}
+with a smaller fixed cell buffer; comparison of physical and graph
+distances absorbs the bounded cell padding into \(2\eta L\).
+Lemma~\ref{lem:generalcomparison} preserves the band
 and the lower gap bound \(\Delta=\gamma>w\) in the enlarged
 sector.  The densities, local approximants, currents, and dynamics
 preserve both spin numbers, so spectral filters of neutral operators
@@ -581,8 +625,9 @@ norms are at most \(n_\up\).
 
 \begin{theorem}[LLL filling constraint]\label{thm:filling}
 Let the Hamiltonians, selected spin-number sectors, and low-energy
-band projections satisfy Proposition~\ref{prop:analytic}, with fixed
-band rank \(d\), and assume invariance under common
+band projections satisfy the hypotheses of
+Proposition~\ref{prop:analytic}, with fixed band rank \(d\),
+and assume invariance under common
 magnetic translation.  Then, for \(\sigma=\up,\dn\),
 \begin{equation}\label{eq:filling}
  \dist\left(\frac{dn_\sigma}{M},\mathbb Z\right)
@@ -882,11 +927,10 @@ the lowest \(d\) states satisfy Assumption~\ref{ass:band}:
 \(d\) is fixed, their width is at most \(w\), and the gap above
 them is at least \(\gamma>w\).  Let \(P\) be the spectral
 projection onto this band, including all its spin sectors.
-Assume an ambient unitary \(\mathcal R\) exchanges the two spin numbers
-and preserves the penalty:
+Assume an ambient unitary \(\mathcal R\) preserves the all-LLL
+subspace, commutes with the interaction, and exchanges the two spin numbers:
 \[
- [\mathcal R,H_{\mathrm{LLL}}]=0,\qquad
- \left[\mathcal R,\sum_\sigma\dG_\sigma(1-\Pi)\right]=0,
+ [\mathcal R,H_{\mathrm{LLL}}]=0,
 \]
 \[
  \mathcal R^\dagger N_\up \mathcal R=N_\dn,\qquad
@@ -910,14 +954,11 @@ sizes,
  \frac1M\Tr(PN_\up)
    =\sum_{\bm n}\frac{d_{\bm n}n_\up}{M}\in\mathbb Z.
 \]
-Use the extensive penalty \(\mu_M\) and the total-number
-comparison in Lemma~\ref{lem:generalcomparison}.  It identifies
-\(P\) with the low-energy spectral projection of
-\(H_{\mathrm{ext}}\) in
-\(\HH_N=\{\psi:(N_\up+N_\dn)\psi=N\psi\}\).
-The two commutation assumptions on \(\mathcal R\) imply
-\([\mathcal R,H_{\mathrm{ext}}]=0\), and spin exchange preserves
-\(\HH_N\).  Consequently \(\mathcal R^\dagger PR=P\), and cyclicity gives
+Spin exchange preserves total number.  Thus \(\mathcal R\) acts
+unitarily on the all-LLL fixed-\(N\) sector and commutes there
+with \(H_{\mathrm{LLL}}\), hence with its spectral projection
+\(P\).  Consequently \(\mathcal R^\dagger P\mathcal R=P\),
+and cyclicity gives
 \[
  \Tr(PN_\up)=\Tr(PN_\dn),\qquad
  \Tr\bigl(P(N_\up+N_\dn)\bigr)=dN.
@@ -929,8 +970,8 @@ If \(N/M\to p/q\), taking the limit gives \(dp/(2q)\in\mathbb Z\),
 and the arithmetic of Corollary~\ref{cor:rational} gives \(b_\nu\mid d\).
 For an \(\mathrm{SU}(2)\)-invariant Hamiltonian, the second
 quantization of a rotation by \(\pi\) about the spin \(x\)-axis
-supplies \(\mathcal R\).  It acts only on spin, so it commutes with the
-spin-independent penalty.  Conservation of \(N\) and \(S^z\)
+supplies \(\mathcal R\).  It acts only on spin, so it preserves
+the all-LLL subspace.  Conservation of \(N\) and \(S^z\)
 gives conservation of both spin numbers.
 \end{proof}
 
@@ -1434,8 +1475,8 @@ In particular,
 
 For \(\ell\ge1\), retain only shells with \(n\le\lfloor\ell\rfloor\),
 and call the resulting Hamiltonian \(H^{(\ell)}\) and interaction
-\(\Phi^{(\ell)}\).  Its support diameters are at most \(D\ell\),
-with a uniform \(D\), and
+\(\Phi^{(\ell)}\).  Its support diameters are at most \(C_{\mathrm{diam}}\ell\),
+with a uniform \(C_{\mathrm{diam}}\), and
 \[
  \norm{H-H^{(\ell)}}\le C_kV_L(1+\ell)^{-k}
  \quad\hbox{for every }k.
@@ -1458,8 +1499,8 @@ we consequently have
 \end{equation}
 Both constants are independent of \(L\) and \(\ell\).
 For the first inequality, a nonzero summand has
-\(d(x,y)\le D\ell\), so the exponential weight costs at most
-\(e^D\), and the polynomial estimate with \(p=4\) applies.
+\(d(x,y)\le C_{\mathrm{diam}}\ell\), so the exponential weight costs at most
+\(e^{C_{\mathrm{diam}}}\), and the polynomial estimate with \(p=4\) applies.
 For the second, the triangle inequality bounds the quotient of
 exponential weights by one.  Split the sum according to which
 of \(d(x,z),d(z,y)\) is at least \(d(x,y)/2\); the corresponding
@@ -1468,6 +1509,12 @@ polynomial quotient is bounded by \(2^4\) times the other
 volume growth.
 
 \subsection{Propagation estimates}
+
+We use the bounded-interaction Lieb--Robinson chain argument;
+see \cite[Section~3.1, Theorem~3.1]{NSY19}, whose framework allows
+infinite-dimensional local Hilbert spaces.  The proof below records
+the estimates for our even fermionic algebras and the uniformity in
+the truncation range \(\ell\).
 
 \begin{lemma}[Uniform estimate for truncated interactions]\label{lem:LR}
 For bounded even ambient operators \(A,B\) supported on disjoint
@@ -1513,7 +1560,7 @@ convergence permits finite-sum approximation when needed.
 
 For a cell set \(\Omega\), let \(H_\Omega^{(\ell)}\) contain
 only retained terms whose supports are contained in \(\Omega\).
-Write \(X^{(r)}=\{x:d(x,X)\le r\}\).  If \(r>2D\ell\), then
+Write \(X^{(r)}=\{x:d(x,X)\le r\}\).  If \(r>2C_{\mathrm{diam}}\ell\), then
 \begin{equation}\label{eq:dynamicsapprox}
 \begin{split}
  &\norm{\tau_t^H(A)-\tau_t^{H_{X^{(r)}}^{(\ell)}}(A)}\\
@@ -1526,7 +1573,7 @@ The first term is the norm Duhamel bound for replacing \(H\)
 by \(H^{(\ell)}\).  For the second, compare the full and
 restricted truncated dynamics by Duhamel's formula.  Every
 omitted support \(Z\) contains a cell outside \(X^{(r)}\);
-its diameter is at most \(D\ell<r/2\), so \(d(X,Z)>r/2\).
+its diameter is at most \(C_{\mathrm{diam}}\ell<r/2\), so \(d(X,Z)>r/2\).
 Lemma~\ref{lem:LR}, applied to the restricted dynamics and
 \(B=\Phi^{(\ell)}(Z)\), bounds the sum of commutator norms by
 \[
@@ -1570,12 +1617,12 @@ bound with fixed constants.  Denote its restriction to
 \((N_0)_{X^{(r)}}\), omitted terms of diameter less than
 \(r/2\) lie at least \(r/2\) from \(X\) and are bounded by that
 propagation estimate.  The remaining terms have total norm
-at most \(CV_L(1+r)^b e^{-cr^2}\), by the Gaussian shells,
-for a fixed \(b\).  Duhamel's formula thus gives, uniformly
+at most \(CV_L(1+r)^{p_0} e^{-cr^2}\), by the Gaussian shells,
+for a fixed \(p_0\).  Duhamel's formula thus gives, uniformly
 for \(\abs s\le\pi\),
 \[
  \norm{\tau_s^{N_0}(A)-\tau_s^{(N_0)_{X^{(r)}}}(A)}
- \le C\norm A\,|X|V_L(1+r)^b e^{-a_0r}.
+ \le C\norm A\,|X|V_L(1+r)^{p_0} e^{-a_0r}.
 \]
 In particular this is \(\norm A\,O(L^{-\infty})\) for
 \(r=\eta L\).
@@ -1981,8 +2028,8 @@ The integral of \(1/|t|\) over this range costs only
 \(O((a+1)\log L)\), so choosing \(m>k+1\) suffices.
 For \(|t|>T\), the trivial commutator bound
 \(2\norm A\norm B\) and the Schwartz tail of \(\beta\)
-give \(C_b\norm A\norm B T^{-b}\) for every \(b\).
-Choosing \(b>3k\) and using \eqref{eq:clusteridentity} proves
+give \(C_j\norm A\norm B T^{-j}\) for every \(j\).
+Choosing \(j>3k\) and using \eqref{eq:clusteridentity} proves
 \begin{equation}\label{eq:clusterbound}
  \norm{PA(1-P)BP}\le C_{k,c}\norm A\norm B L^{-k}
  \qquad\text{for every }k.
@@ -2029,6 +2076,14 @@ S.~Bachmann, A.~Bols, W.~De Roeck, and M.~Fraas,
 J.\ Math.\ Phys.\ \textbf{62}, 011901 (2021),
 \href{https://arxiv.org/abs/2001.06458v3}{arXiv:2001.06458v3}.
 Version 3 (31 March 2022) corrects Lemma 4.1.
+
+\bibitem{NSY19}
+B.~Nachtergaele, R.~Sims, and A.~Young,
+\emph{Quasi-Locality Bounds for Quantum Lattice Systems.
+Part I. Lieb-Robinson Bounds, Quasi-Local Maps, and Spectral Flow
+Automorphisms},
+J.\ Math.\ Phys.\ \textbf{60}, 061101 (2019),
+\href{https://arxiv.org/abs/1810.02428v2}{arXiv:1810.02428v2}.
 
 \bibitem{Haldane85}
 F.~D.~M.~Haldane,
