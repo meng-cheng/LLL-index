@@ -52,18 +52,21 @@ an index theorem, verification from a spectral gap, examples, and the
 boundary-factorization proof.  A finite-rank formulation is proved as
 well, using a determinant instead of the phase of a single state.
 The lowest Landau level is included in the ordinary continuum fermion
-space, and particles outside it are assigned a fixed positive energy.
-Gaussian projection kernels then supply locality, while physical
+space, and particles outside it are assigned an auxiliary energy
+proportional to the volume.  Rapid physical-space locality of the
+interaction and Gaussian projection kernels supply locality, while physical
 regional particle numbers retain integer spectra.  The construction
 uses no localized orthonormal basis and no discrete tight frame.
 The low-energy sector is a band of \(d\) states with width at most
 \(w\), separated from higher states by a uniform gap \(\gamma>w\).
 Exact degeneracy is not assumed; exponentially small splitting is
-included.  For uniformly bounded local LLL field polynomials, a
-particle-addition estimate preserves this band under the enlargement
-when the relevant filling stays below saturation.  Neither positivity
-nor zero ground energy is needed.  More generally, a uniform bound
-on the energy decrease under particle removal suffices.
+included.  The interaction has a uniformly bounded, neutral LLL density
+with local ambient approximants whose errors decay faster than every
+power of the radius.  No bound on its polynomial degree or coefficients
+is imposed.  An extensive auxiliary penalty preserves the band even at
+saturation; periodicity of the LLL number evolution prevents this penalty
+from spoiling the macroscopic propagation estimates.  Neither positivity,
+zero ground energy, nor a particle-removal estimate is needed.
 Magnetic translation gives the constraint
 \(dn_\sigma/N_\phi\in\mathbb Z+O(L^{-\infty})\), where \(d\)
 is the rank of this band in the selected spin-number sector.
@@ -104,15 +107,25 @@ rotation does not preserve the LLL.  We retain the full spatial
 Hilbert space to resolve both issues, and penalize its additional
 modes to preserve the desired low-energy spectrum.
 
-We work throughout with general self-adjoint,
-number-conserving polynomials of uniformly bounded degree and
-coefficients in localized LLL fields.  Averaging the energy of adding
-a particle gives a uniform bound on the change of ground energy
-between number sectors.  At fillings bounded away from saturation,
-this proves that a sufficiently large, size-independent penalty
-preserves the desired spectral band and its gap to higher states.
-No sign condition on the interaction, zero-energy condition, or gaps
-in the smaller particle-number sectors are needed for that comparison.
+We work with self-adjoint, neutral LLL densities that are uniformly
+bounded on the full Fock space and admit physical local approximants
+with errors smaller than every inverse power of their radius.
+Uniformly bounded field polynomials with Gaussian-local test vectors
+are examples, but neither a degree bound nor a bound on their polynomial
+coefficients is required.  A penalty proportional to the volume
+preserves the selected band using only the extensive norm bound on the
+Hamiltonian, including at saturated fillings.  Its large coefficient
+does not force a large propagation speed in the estimates we need:
+the penalty dynamics factors through the integer-valued LLL number
+operator and can be reduced to a bounded time interval.
+
+Two further ingredients handle the weaker locality hypothesis.
+Truncating interaction range and evolution time at \(L^{1/3}\)
+gives superpolynomial accuracy across macroscopic buffers.
+Finite LLL rank bounds the regional-charge Fourier bandwidth, allowing
+bounded current approximants without commuting an arbitrary local
+operator with an unbounded charge.  The resulting currents have norm
+\(O(L^3)\), which is sufficient for the index argument.
 
 Only magnetic translations at the original boundary conditions are
 needed.  The auxiliary parameter in the index proof parametrizes
@@ -124,9 +137,9 @@ for the coprime numerator and denominator of the total filling.
 The general spin-resolved constraint is derived first.  We then
 specialize to balanced populations, discuss the numerator and
 denominator parity, and prove a fixed-total-number version using
-spin-exchange symmetry.  The general polynomial class covers balanced
-fillings \(0<\nu<2\); at saturation the same proof applies
-if a uniform energy-removal bound is verified separately.  The rank \(d\) is fixed and the gap above the
+spin-exchange symmetry.  The interaction class covers balanced
+fillings \(0<\nu\le2\), including saturation without an additional
+energy-comparison assumption.  The rank \(d\) is fixed and the gap above the
 band is uniform in the selected number sector.  The exact multiplicity
 of the lowest eigenvalue may be smaller than \(d\).
 
@@ -317,24 +330,43 @@ Appendix~\ref{app:kernel} proves, uniformly in the torus,
  \int_{\TT_L}|e_R\rangle\langle e_R|\dd R=\Pi.
 \end{equation}
 
-\begin{definition}[Local LLL field polynomial]\label{def:local}
+\begin{definition}[Bounded rapidly local LLL interaction]\label{def:local}
 Let
 \[
- H_{\mathrm{LLL}}=\int_{\TT_L}h_R\dd R
+ H=H_{\mathrm{LLL}}=\int_{\TT_L}h_R\dd R.
 \]
-where \(h_R=h_R^\dagger\) is a neutral polynomial in annihilators
-and creators with test vectors \(e_R,g_R\).  The number of monomials,
-their degrees, and their coefficients are uniformly bounded in \(R\)
-and \(L\).  More generally, one may use a fixed finite family
-\(f_{\alpha,R}\in\mathfrak h_0\) with uniform norm and Gaussian
-\(L^2\)-tail bounds of the form \eqref{eq:tails}.  All these fields
-are smeared by genuine one-particle vectors.
-
-By averaging the polynomial over the two gauge rotations, one may
-and will choose every monomial to have equal numbers of creators
-and annihilators of each spin.  Thus the monomials are even and
-neutral individually.  No sign condition on \(h_R\) is imposed.
+Each \(h_R=h_R^\dagger\) is a neutral operator on the LLL Fock
+factor, canonically extended by the identity on its orthogonal-complement
+Fock factor, and \(\norm{h_R}\le C\) uniformly in \(R,L\).
+The density is measurable.  For every \(r\ge1\) there are measurable,
+self-adjoint, neutral ambient operators \(h_R^{(r)}\), supported
+in the physical ball \(B_r(R)\), such that for every \(k\)
+\begin{equation}\label{eq:happrox}
+ \norm{h_R-h_R^{(r)}}\le C_k(1+r)^{-k}.
+\end{equation}
+All constants are independent of \(R,L,r\).  At radii covering
+the torus, take \(h_R^{(r)}=h_R\).  Weak operator measurability
+of the approximants suffices; their integrals below may be taken
+in the weak operator sense.  Uniform norm bounds control those integrals.
 \end{definition}
+
+The approximants need not preserve the LLL.  Their spatial support
+and the error in \eqref{eq:happrox} are measured on the full physical
+Fock space, before selecting a number sector.  Averaging an approximant
+over both global gauge rotations preserves its support and makes it
+neutral without increasing its error.  For the finite-dimensional LLL
+algebra, measurability of \(h_R\) also gives a norm integral.
+No positivity or uniform polynomial-degree assumption is imposed.
+
+For example, a self-adjoint neutral polynomial in fields with test
+vectors \(e_R,g_R\), or a fixed finite family of uniformly bounded
+Gaussian-local LLL vectors, satisfies this definition when its degree,
+number of monomials, and coefficients are uniformly bounded.
+Truncating the test vectors to \(B_r(R)\) and telescoping each
+product gives a Gaussian version of \eqref{eq:happrox} by the CAR.
+This is a sufficient subclass, not a restriction on the general density.
+The locality assumption concerns physical space; no equivalence with
+locality in an orbital or slot embedding is asserted.
 
 \begin{assumption}[Isolated low-energy band]\label{ass:band}
 In the selected all-LLL number sector, list the eigenvalues of
@@ -363,212 +395,83 @@ a fixed \(w<\gamma\).  Exponential decay of \(w_L\) is more
 than is needed.  An exactly degenerate ground space is the special
 case \(w_L=0\).
 
-The polynomial in Definition~\ref{def:local} also defines a bounded operator
-on the full Fock space, acting as the LLL operator tensored with the
-identity on spectator modes.  The CAR give \(\norm{h_R}\le C\)
-and \(\norm{H_{\mathrm{LLL}}}\le CM\).  For fixed \(\mu>0\), set
+\subsection{An extensive penalty and its periodic dynamics}
+\label{sec:enlargement}
+
+Boundedness of the density and the area \(2\pi M\) give
+\begin{equation}\label{eq:Hnorm}
+ \norm H\le C_HM
+\end{equation}
+with a size-independent \(C_H\).  Define
+\[
+ N_0=\sum_\sigma\dG_\sigma(\Pi),\qquad
+ N_{\mathrm{out}}=\sum_\sigma\dG_\sigma(1-\Pi),\qquad
+ N=N_\up+N_\dn=N_0+N_{\mathrm{out}},
+\]
+and introduce the auxiliary Hamiltonian
 \begin{equation}\label{eq:penalty}
- H_{\mathrm{ext}}=H_{\mathrm{LLL}}
-       +\mu\sum_{\sigma=\up,\dn}\dG_\sigma(1-\Pi).
+ \mu_M=2C_HM+\gamma+1,\qquad
+ H_{\mathrm{ext}}=H+\mu_M N_{\mathrm{out}}.
 \end{equation}
+It is self-adjoint on the domain of \(N_{\mathrm{out}}\).
+The penalty vanishes on all-LLL states and is used only in the proof.
 
-\subsection{Particle addition and spectral-band preservation}
-\label{sec:addition}
-
-We now prove a uniform comparison of ground energies for the general
-class in Definition~\ref{def:local}.  Throughout the next two lemmas
-we work on the finite-dimensional \emph{LLL Fock space}.  Write
-\(H=H_{\mathrm{LLL}}\), and let \(E_0(\bm m)\) be its lowest
-energy at spin populations \(\bm m=(m_\up,m_\dn)\), where
-\(0\le m_\sigma\le M\).  Let \(E_{\mathrm{tot}}(m)\) be its
-lowest energy at total population \(m\), allowing all spin sectors.
-
-\begin{lemma}[Averaged particle addition]\label{lem:addition}
-There is a constant \(C_0\), independent of \(M\) and the populations,
-such that, whenever \(m_\sigma<M\),
-\begin{equation}\label{eq:addspin}
- E_0(\bm m+\bm e_\sigma)-E_0(\bm m)
- \le\frac{C_0M}{M-m_\sigma}.
-\end{equation}
-Here \(\bm e_\sigma\) is the unit vector for the indicated spin.
-For total populations \(0\le m<2M\), the same constant can be
-chosen so that
-\begin{equation}\label{eq:addtotal}
- E_{\mathrm{tot}}(m+1)-E_{\mathrm{tot}}(m)
- \le\frac{C_0M}{2M-m}.
-\end{equation}
-No spectral-gap assumption is made in this lemma.
+\begin{lemma}[Spectral-band preservation]\label{lem:generalcomparison}
+In either a fixed-spin or a fixed-total-number sector satisfying
+Assumption~\ref{ass:band}, \(H_{\mathrm{ext}}\) has the same
+lowest \(d\) states, with the same energies, band projection \(P\),
+and band width as \(H\) on the all-LLL sector.  Its gap above
+this band is at least \(\gamma\).  No assumption on energies
+in smaller number sectors or on the density of empty orbitals is needed.
 \end{lemma}
 \begin{proof}
-Choose any orthonormal basis \(u_1,\ldots,u_M\) of
-\(\mathfrak h_0\), and put \(a_{\sigma j}=a_\sigma(u_j)\).
-Define
+The canonical extension of \(H\) commutes with both spin-resolved
+spectator numbers.  Every block with at least one spectator particle
+has energy at least \(-C_HM+\mu_M\), while the top all-LLL band
+energy obeys \(E_d\le C_HM\).  Hence the gap from \(E_d\) to
+any spectator block is at least
 \[
- \mathcal C_\sigma(H)
-   =\sum_{j=1}^M a_{\sigma j}[H,a_{\sigma j}^\dagger].
+ \mu_M-2C_HM=\gamma+1.
 \]
-We first prove the volume bound
-\begin{equation}\label{eq:addcommutator}
- \norm{\mathcal C_\sigma(H)}\le C_0M.
-\end{equation}
-For a monomial \(F_1\cdots F_s\) of even degree in the local
-fields, commuting a creator through the product gives exactly
-\[
- [F_1\cdots F_s,a_{\sigma j}^\dagger]
- =\sum_{k=1}^s(-1)^{s-k}
- F_1\cdots F_{k-1}\{F_k,a_{\sigma j}^\dagger\}
- F_{k+1}\cdots F_s.
-\]
-The anticommutator vanishes unless \(F_k=a_\sigma(f)\), in
-which case it is \(\ip f{u_j}\).  Multiplying on the left by
-\(a_{\sigma j}\) and summing over \(j\) uses completeness only:
-\[
- \sum_j\ip f{u_j}a_{\sigma j}=a_\sigma(f).
-\]
-Thus \(\mathcal C_\sigma(h_R)\) is a sum of a uniformly bounded
-number of products of the same smeared fields.  Their norms are
-uniformly bounded by the CAR and Definition~\ref{def:local}.
-Integration over area \(2\pi M\) proves \eqref{eq:addcommutator}.
-An orthonormal basis is used here only to take a complete sum;
-no locality of these orbitals is asserted or needed.
-
-On the LLL Fock space, \(\sum_j a_{\sigma j}a_{\sigma j}^\dagger
-=M-N_\sigma\).  Hence
-\begin{equation}\label{eq:addidentity}
- \sum_j a_{\sigma j}H a_{\sigma j}^\dagger
-       =(M-N_\sigma)H+\mathcal C_\sigma(H).
-\end{equation}
-In particular, \(\mathcal C_\sigma(H)\) is self-adjoint, since
-\([H,N_\sigma]=0\).
-For a normalized ground vector \(\psi\) in sector \(\bm m\),
-the trial vectors \(a_{\sigma j}^\dagger\psi\) lie in sector
-\(\bm m+\bm e_\sigma\), and their squared norms sum to
-\(M-m_\sigma\).  The variational principle and
-\eqref{eq:addidentity} give
-\begin{align*}
- (M-m_\sigma)E_0(\bm m+\bm e_\sigma)
- &\le\sum_j\ip{a_{\sigma j}^\dagger\psi}
-                       {H a_{\sigma j}^\dagger\psi}\\
- &=(M-m_\sigma)E_0(\bm m)
-       +\ip\psi{\mathcal C_\sigma(H)\psi}.
-\end{align*}
-Division by \(M-m_\sigma>0\) proves \eqref{eq:addspin}.
-Individual trial vectors need not be nonzero or orthogonal.
-
-For \eqref{eq:addtotal}, start instead from a total-\(m\)
-ground vector and sum over both \(\sigma\) and \(j\).
-The total trial norm is \(2M-m\), and the commutator correction
-is \(\mathcal C_\up(H)+\mathcal C_\dn(H)\).  Increasing
-\(C_0\) once to bound its norm by \(C_0M\) proves the claim.
+The no-spectator block is unchanged and its remaining spectrum lies
+at least \(\gamma\) above \(E_d\).  The same norm bound applies
+to all spin populations, proving both versions, including saturated
+sectors and the case that the entire all-LLL sector is the selected band.
 \end{proof}
-
-\begin{lemma}[Uniform energy bound for particle removal]
-\label{lem:removal}
-Fix \(\epsilon>0\), independent of size, and put
-\(C_\epsilon=C_0/\epsilon\).
-If \(n_\sigma\le(1-\epsilon)M\) for both spins, then
-\begin{equation}\label{eq:removalspin}
- E_0(\bm n-\bm r)\ge E_0(\bm n)-C_\epsilon|\bm r|,
- \qquad 0\le\bm r\le\bm n,
- \quad |\bm r|=r_\up+r_\dn.
-\end{equation}
-For a fixed total number \(N\le(2-\epsilon)M\), one has
-\begin{equation}\label{eq:removaltotal}
- E_{\mathrm{tot}}(N-r)
-       \ge E_{\mathrm{tot}}(N)-C_\epsilon r,
- \qquad 0\le r\le N.
-\end{equation}
-\end{lemma}
-\begin{proof}
-Add particles one at a time from \(\bm n-\bm r\) to \(\bm n\).
-At every step in \eqref{eq:addspin}, the denominator is at least
-\(\epsilon M\).  Summing the upper bounds on the addition energies
-and rearranging proves \eqref{eq:removalspin}.
-Likewise, along the sequence \(N-r,\ldots,N\), the denominators
-in \eqref{eq:addtotal} are at least \(\epsilon M\), giving
-\eqref{eq:removaltotal}.  These are one-sided energy estimates;
-they require neither positivity nor gaps in any intermediate sector.
-\end{proof}
-
-\begin{lemma}[General spectral-band comparison]\label{lem:generalcomparison}
-Let \(H\) be a self-adjoint operator on the LLL Fock space,
-conserving both spin numbers, and extend it by the identity on
-spectator modes.  Locality is not needed for this lemma.
-Suppose its lowest \(d\) states in the selected all-LLL sector have width
-\(E_d-E_1\le w\), with a gap \(E_{d+1}-E_d\ge\gamma>0\)
-above them.  Write \(P\) for their spectral projection.  For this
-comparison alone, no relation between \(\gamma\) and \(w\) is needed.
-Assume a size-independent constant \(C_{\mathrm{rem}}\ge0\)
-bounds the decrease of ground energy on removing particles:
-\eqref{eq:removalspin} in a fixed-spin sector, or
-\eqref{eq:removaltotal} in a fixed-total-number sector, with
-\(C_\epsilon\) replaced by \(C_{\mathrm{rem}}\).
-Choose a fixed \(\mu>C_{\mathrm{rem}}+w\) in \eqref{eq:penalty}.
-Then the enlarged Hamiltonian has exactly the same lowest \(d\)
-states, with the same energies and projection \(P\), and the gap
-above this band is at least
-\begin{equation}\label{eq:generalgap}
- \Delta=\min\{\gamma,\mu-C_{\mathrm{rem}}-w\}>0.
-\end{equation}
-Its spectrum strictly below \(E_1+\mu-C_{\mathrm{rem}}\),
-including multiplicities, is the corresponding all-LLL spectrum.
-In particular, taking \(\mu>C_{\mathrm{rem}}+w+\gamma\)
-retains the lower bound \(\Delta=\gamma\) on the band gap.
-\end{lemma}
-\begin{proof}
-At fixed spin populations \(\bm n\), the block with
-\(\bm r\) spectator particles has interaction energies bounded
-below by \(E_0(\bm n-\bm r)\), and the penalty is
-\(\mu|\bm r|\).  Since \(E_0(\bm n)=E_1\), its bottom obeys
-\[
- E_0(\bm n-\bm r)+\mu|\bm r|
-       \ge E_1+(\mu-C_{\mathrm{rem}})|\bm r|.
-\]
-Every block with at least one spectator lies above
-\(E_1+\mu-C_{\mathrm{rem}}\), or at that energy.  The block
-with no spectators is exactly the original LLL Hamiltonian.
-Thus all selected \(d\) levels remain below every spectator block.
-Subtracting their top energy \(E_d\le E_1+w\) gives a spectator
-gap of at least \(\mu-C_{\mathrm{rem}}-w\); the remaining all-LLL
-states lie at least \(\gamma\) above \(E_d\).
-This proves the assertions in the fixed-spin case.
-At fixed total number \(N\), a block with \(r\) spectators
-has interaction energy at least \(E_{\mathrm{tot}}(N-r)\);
-use \(E_{\mathrm{tot}}(N)=E_1\) and \eqref{eq:removaltotal}
-to obtain the same comparison.
-\end{proof}
-
-Lemma~\ref{lem:removal} verifies this comparison for all interactions
-in Definition~\ref{def:local} below saturation, with
-\(C_{\mathrm{rem}}=C_\epsilon\).  No positivity or zero-energy
-assumption is used.  The particle-addition argument does not establish
-a uniform constant when the density of empty orbitals tends to zero.
-In that case the same comparison applies if a uniform removal bound
-is verified separately.
-
-For balanced populations with limiting filling \(0<\nu<2\),
-one can choose any fixed \(\epsilon<1-\nu/2\) for all large
-sizes.  For the full fixed-total-number problem it suffices to
-choose \(\epsilon<2-\nu\); individual spin sectors may then be
-saturated.  A scalar shift of the Hamiltonian does not replace
-this energy comparison: it shifts all the number sectors by the
-same constant and leaves their energy differences unchanged.
 
 For neutral observables the dynamics of \(H_{\mathrm{ext}}\)
-is the dynamics of the bounded ambient operator
+agrees with that of the bounded ambient operator
 \begin{equation}\label{eq:Hb}
- H_b=H_{\mathrm{LLL}}-\mu\sum_\sigma\dG_\sigma(\Pi)
-     =\int_{\TT_L}k_R\dd R,\qquad
- k_R=h_R-\mu\sum_\sigma
-           a_\sigma^\dagger(e_R)a_\sigma(e_R).
+ H_b=H-\mu_MN_0,\qquad H_{\mathrm{ext}}=H_b+\mu_MN.
 \end{equation}
-Indeed, \(H_{\mathrm{ext}}=H_b+\mu(N_\up+N_\dn)\).
-Every \(k_R\) is bounded, neutral, and has Gaussian local
-approximants, by \eqref{eq:tails}.  No estimate involves a point
-annihilator on the full continuum space.
-In the selected sector of total number \(N\), its low-energy band
-lies in \([E_1-\mu N,E_d-\mu N]\), with unchanged width and gap
-above it.  The filters below use energy differences only.
+On a fixed-total-number sector their spectra differ by the scalar
+\(\mu_MN\), so their band projections, widths, and gaps agree.
+Furthermore,
+\[
+ [H,N_0]=0,\qquad \Spec(N_0)\subset\{0,1,\ldots,2M\},\qquad
+ \norm{H_b}\le C_HM+2\mu_MM=O(L^4).
+\]
+Writing \(\tau_t^G(A)=e^{\ii tG}Ae^{-\ii tG}\), we have the
+exact factorization
+\begin{equation}\label{eq:periodic}
+ \tau_t^{H_b}=\tau_t^H\circ\tau_{s_M(t)}^{N_0},\qquad
+ s_M(t)\equiv-\mu_Mt\pmod{2\pi},\qquad |s_M(t)|\le\pi.
+\end{equation}
+The LLL kernel resolution gives
+\[
+ N_0=\int_{\TT_L}n_R\dd R,\qquad
+ n_R=\sum_\sigma a_\sigma^\dagger(e_R)a_\sigma(e_R),\qquad
+ \norm{n_R}\le C.
+\]
+Restricting \(e_R\) to a ball produces self-adjoint neutral
+approximants to \(n_R\) with Gaussian errors.  Thus the second
+factor in \eqref{eq:periodic} has uniform locality estimates for
+its bounded time interval.  Appendix~\ref{app:locality} combines
+these estimates with those for \(H\), rather than applying a
+generic Lieb--Robinson bound to the density of \(H_b\), whose
+norm grows with \(M\).  The reduced time \(s_M(t)\) may jump;
+periodicity makes the exact evolution continuous, and we never
+differentiate the reduced-time function.
 
 \begin{remark}[Why the physical charge is retained]
 On the LLL, the compression of \(Q_X\) is
@@ -582,60 +485,52 @@ these excursions compatible with a gap in the enlarged sector.
 \subsection{Verification from an isolated band at the original boundary condition}
 
 \begin{proposition}[The analytical input]\label{prop:analytic}
-Let \(H_{\mathrm{LLL}}\) satisfy Definition~\ref{def:local}.
-Suppose its lowest \(d\) states in the all-LLL sector
-\((n_\up,n_\dn)\) satisfy Assumption~\ref{ass:band}, with
-width bound \(w\), gap bound \(\gamma>w\), and projection \(P\).
-Assume \(n_\sigma\le(1-\epsilon)M\) for both spins, with
-a fixed \(\epsilon>0\), so Lemma~\ref{lem:removal} gives
-\(C_{\mathrm{rem}}=C_\epsilon\).
-More generally, this filling restriction may be replaced by any
-uniform removal bound as in Lemma~\ref{lem:generalcomparison}.
-Choose \(\mu>C_{\mathrm{rem}}+w+\gamma\).  Then:
+Let \(H\) satisfy Definition~\ref{def:local}, and suppose its
+lowest \(d\) states in the selected all-LLL spin-number sector
+satisfy Assumption~\ref{ass:band}, with projection \(P\).
+Use \(\mu_M\) from \eqref{eq:penalty} and \(H_b\) from
+\eqref{eq:Hb}.  Then:
 \begin{enumerate}
-\item The ambient dynamics generated by \(H_b\) has a
-size-independent Lieb--Robinson bound for bounded local even
-observables.
+\item For any fixed macroscopic buffer, \(\tau_t^{H_b}\) on neutral
+observables has neutral local approximations with relative ambient error
+\(O(L^{-\infty})\), uniformly for \(|t|\le L^{1/3}\).
+In particular, bounded even observables separated by a distance
+proportional to \(L\) have commutator bounded by the product of
+their norms times \(O(L^{-\infty})\) on this time interval.
 \item For \(Q=Q_\Gamma\), the current is bounded on ambient Fock
 space and splits as
 \[
- \ii[H_b,Q]=J_-+J_+,
+ \ii[H_b,Q]=J_-+J_+.
 \]
-where \(J_\pm\) have norm \(O(L)\) and Gaussian local approximants
-near \(\partial_\pm\).
-\item There are bounded, neutral boundary dressings \(K_\pm\),
-supported in strips of radius \(L_x/64\), with polynomial ambient
-norms, such that
+The currents have norm \(O(ML_y)=O(L^3)\) and local approximants
+in boundary strips of radius \(r\), with errors at most
+\(C_kML_y(1+r)^{-k}\) for every \(k\).
+\item There are bounded, self-adjoint, neutral boundary dressings
+\(K_\pm\), supported in strips of radius \(L_x/64\), with
+polynomial ambient norms, such that
 \[
  [Q-K_--K_+,P]\eqL0.
 \]
 \item The low-energy-sector clustering estimate
-\eqref{eq:groundcluster} holds for bounded neutral local operators.
+\eqref{eq:groundcluster} holds for bounded neutral ambient operators
+supported in \(S_-,S_+\).
 \end{enumerate}
 \end{proposition}
-
 \begin{proof}
-The proofs are given in Appendices~\ref{app:locality} and
-\ref{app:filters}.  We spell out the role of the sector here.
-Local approximants to \(k_R\), and to the currents, preserve both
-particle numbers.  A spectral filter applied to these operators
-therefore connects states only inside \(\HH_{\bm n}\).  The gap
-\(\Delta=\gamma>w\) above this band, retained by
-Lemma~\ref{lem:generalcomparison}, is sufficient, even though
-no grand-canonical gap is assumed.  The commutator
-and propagation estimates use the polynomial bounds in
-Definition~\ref{def:local}, with no positivity requirement.
-The inverse-energy filter handles transitions between the band and
-its complement.  The clustering filter is zero on all intraband
-energy differences, which have magnitude at most \(w<\Delta\).
-Its transition interval lies strictly between \(-\Delta\) and \(-w\).
-The projection identities are therefore exact even when the
-levels inside \(P\) are split; neither equality of their energies
-nor a vanishing band width is used.
-Ambient norm estimates supply
-locality, while the charge estimates
-\(\norm{Q_X|_{\HH_{\bm n}}}\le CL^2\) control the algebraic
-errors involving charges.  This division is used throughout.
+Appendices~\ref{app:locality} and \ref{app:filters} prove these
+statements.  Lemma~\ref{lem:generalcomparison} preserves the band
+and the lower gap bound \(\Delta=\gamma>w\) in the enlarged
+sector.  The densities, local approximants, currents, and dynamics
+preserve both spin numbers, so spectral filters of neutral operators
+connect only states in the selected sector.  A grand-canonical gap
+is unnecessary.  The inverse-energy filter handles transitions
+between \(P\) and its complement.  The clustering filter vanishes
+on all intraband differences, whose magnitudes are at most \(w\).
+Thus its projection identities remain exact when the band is split.
+Ambient norm bounds supply locality; the sector estimate
+\(\norm{Q_X|_{\HH_{\bm n}}}\le CL^2\) controls algebraic errors
+involving charges.  The larger polynomial current norms do not change
+the \(O(L^{-\infty})\) error class used in the index proof.
 \end{proof}
 
 For a unitary moving physical supports by a uniformly bounded
@@ -782,14 +677,13 @@ The denominator of \(p/(2q)\) in lowest terms is
 \(\gcd(p,2q)=\gcd(p,2)\), proving the result.
 \end{proof}
 
-For \(0<\nu<2\), the balanced-population hypothesis makes the
-partial-filling condition in Proposition~\ref{prop:analytic}
-automatic for all large sizes.  Thus this corollary applies to
-general local LLL field polynomials with an isolated low-energy
-band satisfying Assumption~\ref{ass:band}, at any lowest energy
-and with possible splitting inside the band.  At the endpoint \(\nu=2\),
-a separately verified uniform removal bound is required for
-this enlargement argument.
+This corollary applies to the bounded, rapidly local LLL interactions
+of Definition~\ref{def:local}, including the endpoint \(\nu=2\),
+with an isolated low-energy band satisfying Assumption~\ref{ass:band}.
+The lowest energy is arbitrary and splitting inside the band is
+allowed.  The extensive auxiliary penalty preserves the band
+without a particle-removal estimate or a positive density of empty
+orbitals.
 
 The parity distinction can equivalently be organized by the
 denominator of the total filling:
@@ -921,8 +815,6 @@ Let \(H_{\mathrm{LLL}}\) satisfy Definition~\ref{def:local} and
 be invariant under common magnetic translation.  In the full
 all-LLL sector of total number \(N\), suppose its lowest \(d\)
 states satisfy Assumption~\ref{ass:band}, with projection \(P\).
-Assume \(N\le(2-\epsilon)M\) for a fixed \(\epsilon>0\), or
-more generally the uniform removal bound \eqref{eq:removaltotal}.
 No spin-exchange symmetry is required.
 Since \(P\) commutes with \(N_\up\),
 write
@@ -943,12 +835,9 @@ In particular, \(d_{\bm n}=0\) whenever
 \end{corollary}
 \begin{proof}
 Let \(E_1\le E_2\le\cdots\) be the energies of the fixed-\(N\)
-all-LLL sector, with band
-constants \(w\) and \(\gamma>w\), and let \(C_{\mathrm{rem}}\) be
-the constant in \eqref{eq:removaltotal}.  Under the filling
-restriction \(C_{\mathrm{rem}}=C_\epsilon\).
+all-LLL sector, with band constants \(w\) and \(\gamma>w\).
 
-Every monomial of \(H_{\mathrm{LLL}}\) is neutral in each spin, so
+The density in Definition~\ref{def:local} is neutral in each spin, so
 \(H_{\mathrm{LLL}}\) is reduced by the fixed-spin parts of the
 all-LLL fixed-\(N\) sector.  Hence \(P\) commutes with \(N_\up\),
 and \(P_{\bm n}\) is the spectral projection of
@@ -962,27 +851,16 @@ its lowest \(d_{\bm n}\) states.  Their width is at most
 \(E_d-E_1\le w\), and the next eigenvalue in the sector is at least
 \(E_{d+1}\ge E_d+\gamma\).  Thus Assumption~\ref{ass:band} holds in
 this sector, with rank \(d_{\bm n}\) and the same \(w\) and
-\(\gamma\).  The sector also has a uniform fixed-spin removal
-bound.  For \(0\le\bm r\le\bm n\) with \(\abs{\bm r}\ge1\), the
-population \(\bm n-\bm r\) has total number \(N-\abs{\bm r}\), so
-\eqref{eq:removaltotal} and \(E_0(\bm n)\le E_d\le E_1+w\) give
-\[
- E_0(\bm n-\bm r)\ge E_{\mathrm{tot}}(N-\abs{\bm r})
- \ge E_1-C_{\mathrm{rem}}\abs{\bm r}
- \ge E_0(\bm n)-(C_{\mathrm{rem}}+w)\abs{\bm r}.
-\]
-This is \eqref{eq:removalspin} with \(C_{\mathrm{rem}}+w\) in place
-of \(C_\epsilon\).  It is needed because a spin sector inside the
-fixed-\(N\) sector may be close to spin saturation, where
-Lemma~\ref{lem:removal} gives no fixed-spin bound.
+\(\gamma\).  Lemma~\ref{lem:generalcomparison} preserves this band
+using the same \(\mu_M\) in every spin sector: its norm comparison
+is uniform in the populations, including saturated ones.
 
 Suppose the first assertion fails for infinitely many sizes.  For
 each such size choose a sector \(\bm n(L)\) with
 \(d_{\bm n(L)}>0\) that violates \eqref{eq:spinresolved}.  Since
 \(1\le d_{\bm n(L)}\le d\), a further subsequence has constant rank
 \(d'\).  Along it, the previous paragraph verifies the hypotheses of
-Proposition~\ref{prop:analytic}, in its form with a uniform removal
-bound, for the sectors \(\bm n(L)\) and projections
+Proposition~\ref{prop:analytic} for the sectors \(\bm n(L)\) and projections
 \(P_{\bm n(L)}\); invariance under common magnetic translation is
 assumed.  Theorem~\ref{thm:filling}, applied along this subsequence,
 gives \(M\mid d'n_\up(L)\) and \(M\mid d'n_\dn(L)\) for all large
@@ -1004,10 +882,6 @@ the lowest \(d\) states satisfy Assumption~\ref{ass:band}:
 \(d\) is fixed, their width is at most \(w\), and the gap above
 them is at least \(\gamma>w\).  Let \(P\) be the spectral
 projection onto this band, including all its spin sectors.
-Assume also \(N\le(2-\epsilon)M\) for a fixed \(\epsilon>0\).
-More generally, this filling restriction may be replaced by a
-uniform bound of the form \eqref{eq:removaltotal}, with a
-size-independent constant \(C_{\mathrm{rem}}\).
 Assume an ambient unitary \(\mathcal R\) exchanges the two spin numbers
 and preserves the penalty:
 \[
@@ -1036,7 +910,7 @@ sizes,
  \frac1M\Tr(PN_\up)
    =\sum_{\bm n}\frac{d_{\bm n}n_\up}{M}\in\mathbb Z.
 \]
-Choose \(\mu>C_{\mathrm{rem}}+w+\gamma\) and apply the total-number
+Use the extensive penalty \(\mu_M\) and the total-number
 comparison in Lemma~\ref{lem:generalcomparison}.  It identifies
 \(P\) with the low-energy spectral projection of
 \(H_{\mathrm{ext}}\) in
@@ -1120,8 +994,7 @@ allows extensively polarized sectors with
 Let \(H_{\mathrm{LLL}}\) satisfy Definition~\ref{def:local}, and let
 it be \(\mathrm{SU}(2)\)-invariant and invariant under common
 magnetic translation.  In the all-LLL sectors of total number \(N\),
-assume \(N\le(2-\epsilon)M\) for a fixed \(\epsilon>0\), or a
-uniform bound of the form \eqref{eq:removaltotal}.  Fix \(d\), and
+fix \(d\), and
 suppose \(w_L=E_d(L)-E_1(L)\to0\).  Suppose also that, for all
 sufficiently large tori, \(\bm S^2\) does not vanish on the spectral
 subspace of eigenvalues at most \(E_d(L)\).  Then
@@ -1164,7 +1037,7 @@ Here \(p=1\), \(q=2\), and hence \(b_\nu=4\).
 \begin{corollary}[Band-gap obstruction]\label{cor:gapobstruction}
 Fix a rational limiting filling \(\nu=p/q\) and either the
 balanced-sector or the full spin-exchange-symmetric setting.
-Retain the locality, symmetry, and uniform energy-comparison
+Retain the boundedness, rapid physical locality, and symmetry
 hypotheses, but do not assume a uniform spectral gap.
 For a fixed \(d\) with \(b_\nu\nmid d\), suppose the widths
 \(w_L=E_d(L)-E_1(L)\) are uniformly bounded, and write
@@ -1196,9 +1069,9 @@ the second limit in \eqref{eq:gapobstruction}.
 At balanced half filling, a Hamiltonian in the stated class with
 exactly ten ground states at any common energy \(E_1(L)\) has
 \(d=10\), \(w_L=0\), and hence \(E_{11}(L)-E_1(L)\to0\).
-For zero-energy ground states this reads \(E_{11}(L)\to0\).  The partial-filling estimate
-supplies the removal bound without any sign assumption on the
-interaction in other particle-number sectors.
+For zero-energy ground states this reads \(E_{11}(L)\to0\).
+No sign assumption or energy comparison with other particle-number
+sectors is required.
 The same obstruction applies to a proposed rank-ten band with
 exponentially small, or merely vanishing, splitting.  Spectral
 counting is a separate input; no assertion about that count is
@@ -1227,12 +1100,9 @@ spin-singlet ground state.  For example, at \(\nu=2\) the
 two spin components of the LLL are completely filled.  The
 all-LLL sector with \(N=2M\) is one-dimensional and its filled
 state is a spin singlet.  Take \(H_{\mathrm{LLL}}=0\), which
-belongs to Definition~\ref{def:local}.  All particle-number
-sectors then have lowest energy zero, verifying the removal
-bound directly with \(C_{\mathrm{rem}}=0\) even at saturation.
-After the enlargement its Hamiltonian
-is \(\mu\sum_\sigma\dG_\sigma(1-\Pi)\), with this unique
-ground state and gap \(\mu\) at fixed \(N\).  The all-LLL
+belongs to Definition~\ref{def:local}.  After the enlargement its Hamiltonian
+is \(\mu_M\sum_\sigma\dG_\sigma(1-\Pi)\), with this unique
+ground state and gap \(\mu_M\) at fixed \(N\).  The all-LLL
 sector itself has no orthogonal states.  Thus a universal
 claim \(2q\mid d\) would already fail at \(p=2,q=1,d=1\),
 whereas \eqref{eq:generaldivisor} gives the correct divisor one.
@@ -1509,211 +1379,444 @@ by setting \(r_0=0\).  Finally, the orthonormal expansion gives
 \subsection{Spatial cells and a bounded interaction}
 
 Partition the physical torus into rectangles of side lengths
-between \(1\) and \(2\).  Their adjacency graph has uniformly
-bounded degree and quadratic volume growth.  A cell carries
-the infinite-dimensional Fock space of its \(L^2\) sections;
-no basis in that space is chosen.
+between \(1\) and \(2\), and denote their adjacency graph by
+\(\Lambda_L\).  Its degree and quadratic volume-growth constants
+are uniform, and \(V_L:=|\Lambda_L|=O(L^2)\).
+Graph distance and physical distance are comparable up to uniform
+multiplicative and additive constants.  We use graph distance in
+this appendix.  Replacing a physical support by the cells it meets
+adds only a bounded spatial padding, which is absorbed in the
+macroscopic buffers below.  A cell carries the infinite-dimensional
+Fock space of its \(L^2\) sections; no basis in that space is chosen.
 
-Replace every test vector in \(k_R\) by its restriction to the
-ball of radius \(r\) about \(R\).  The resulting \(k_R^{(r)}\)
-is bounded, neutral, and supported in that ball.  A telescopic
-expansion of a product of annihilators and creators, together
-with \(\norm{a(f)}=\norm f\), gives
+Write \(H=H_{\mathrm{LLL}}\).  Definition~\ref{def:local} supplies
+self-adjoint neutral approximants with
 \begin{equation}\label{eq:kapprox}
- \norm{k_R}\le C,\qquad
- \norm{k_R-k_R^{(r)}}\le Ce^{-cr^2}.
+ \norm{h_R}\le C,\qquad
+ \norm{h_R-h_R^{(r)}}\le C_k(1+r)^{-k}
+ \quad\hbox{for every }k.
 \end{equation}
-The degrees and coefficients are fixed, so the constants are
-uniform.  The truncation respects adjoints.  We take its neutral
-part by averaging over the two global gauge rotations if necessary;
-this preserves support and does not increase the error, since
-\(k_R\) is neutral.  Equivalently one can first express \(k_R\)
-as a sum of monomials neutral in each spin and then truncate.
-
-For each cell \(z\), put \(A_z=\int_z k_R\dd R\), and similarly
-define \(A_z^{(r)}\).  Increasing the radius by a fixed harmless
-amount, define
+For each cell \(z\), put \(A_z=\int_z h_R\dd R\) and
+\(A_z^{(r)}=\int_z h_R^{(r)}\dd R\).  Weak operator integrals
+suffice for the approximants: the norm estimates pass through the
+integrals, and local von Neumann algebras are weakly closed.
+Set
 \[
  \Phi_{z,0}=A_z^{(1)},\qquad
  \Phi_{z,n}=A_z^{(n+1)}-A_z^{(n)}\quad(n\ge1).
 \]
-Then \(H_b=\sum_{z,n}\Phi_{z,n}\), each term is supported on
-cells within distance \(C(n+1)\) of \(z\), and
-\(\norm{\Phi_{z,n}}\le Ce^{-cn^2}\).
-On a finite torus the truncations eventually equal \(A_z\).
-This is a decomposition by physical regions, not an expansion
-in one-particle orbitals.
-
-If terms with the same support are collected into \(\Phi(Z)\),
-the preceding bounds imply, for any fixed \(a>0\),
-\begin{equation}\label{eq:Fbound}
- \mathcal I_a:=\sup_{x,y}
- \frac{\displaystyle\sum_{Z\ni x,y}\norm{\Phi(Z)}}
-      {F_a(d(x,y))}<\infty,\qquad
- F_a(r)=\frac{e^{-ar}}{(1+r)^4},
-\end{equation}
-uniformly in the torus.  Indeed a contributing radius is at
-least a constant times \(d(x,y)\), the possible centers grow
-only quadratically, and a Gaussian absorbs every such factor.
-Quadratic volume growth also gives
+Each term is self-adjoint and neutral, is supported on a cell set
+\(Z_{z,n}\subset B_{C(n+1)}(z)\), and satisfies
 \[
- \sum_z F_a(d(x,z))F_a(d(z,y))
-       \le C_F F_a(d(x,y)).
+ \norm{\Phi_{z,n}}\le C_k(1+n)^{-k}
+ \quad\hbox{for every }k.
 \]
-To see this, split the sum according to which of
-\(d(x,z),d(z,y)\) is at least \(d(x,y)/2\), use the triangle
-inequality for the exponentials, and sum the remaining
-\((1+r)^{-4}\) factor.
+The approximants equal \(A_z\) once the radius covers the torus,
+so \(H=\sum_{z,n}\Phi_{z,n}\).  The sum is norm convergent.
+This is a decomposition by physical regions, not by LLL orbitals.
+
+Collecting terms with the same support gives an interaction
+\(\Phi(Z)\).  For every fixed \(p\ge0\),
+\begin{equation}\label{eq:polysummability}
+ \sup_x\sum_{Z\ni x}|Z|(1+\diam Z)^p\norm{\Phi(Z)}
+ \le C_p.
+\end{equation}
+Indeed, a shell of index \(n\) containing \(x\) has at most
+\(C(1+n)^2\) possible centers, at most \(C(1+n)^2\) cells,
+and diameter at most \(C(1+n)\).  Its contribution is bounded
+by \(C_k(1+n)^{p+4-k}\), summable when \(k>p+5\).
+In particular,
+\[
+ \sum_Z|Z|\norm{\Phi(Z)}\le CV_L,\qquad
+ \sup_{x,y}(1+d(x,y))^p\sum_{Z\ni x,y}\norm{\Phi(Z)}
+ \le C_p.
+\]
+
+For \(\ell\ge1\), retain only shells with \(n\le\lfloor\ell\rfloor\),
+and call the resulting Hamiltonian \(H^{(\ell)}\) and interaction
+\(\Phi^{(\ell)}\).  Its support diameters are at most \(D\ell\),
+with a uniform \(D\), and
+\[
+ \norm{H-H^{(\ell)}}\le C_kV_L(1+\ell)^{-k}
+ \quad\hbox{for every }k.
+\]
+All preceding summability bounds also hold for the retained shells,
+whether or not collecting them causes cancellations.  With
+\[
+ F_\ell(r)=\frac{e^{-r/\ell}}{(1+r)^4},
+\]
+we consequently have
+\begin{equation}\label{eq:Fbound}
+ \mathcal I_\ell:=
+ \sup_{x,y}
+ \frac{\displaystyle\sum_{Z\ni x,y}\norm{\Phi^{(\ell)}(Z)}}
+      {F_\ell(d(x,y))}
+ \le C,
+ \qquad
+ \sum_z F_\ell(d(x,z))F_\ell(d(z,y))
+ \le C_F F_\ell(d(x,y)).
+\end{equation}
+Both constants are independent of \(L\) and \(\ell\).
+For the first inequality, a nonzero summand has
+\(d(x,y)\le D\ell\), so the exponential weight costs at most
+\(e^D\), and the polynomial estimate with \(p=4\) applies.
+For the second, the triangle inequality bounds the quotient of
+exponential weights by one.  Split the sum according to which
+of \(d(x,z),d(z,y)\) is at least \(d(x,y)/2\); the corresponding
+polynomial quotient is bounded by \(2^4\) times the other
+\((1+r)^{-4}\) factor.  Its sum is uniformly finite by quadratic
+volume growth.
 
 \subsection{Propagation estimates}
 
-\begin{lemma}[Lieb--Robinson estimate]\label{lem:LR}
-For bounded even ambient operators \(A,B\) supported on cell
-sets \(X,Y\), with \(X\cap Y=\varnothing\),
+\begin{lemma}[Uniform estimate for truncated interactions]\label{lem:LR}
+For bounded even ambient operators \(A,B\) supported on disjoint
+cell sets \(X,Y\),
 \begin{equation}\label{eq:LR}
- \norm{[\tau_t(A),B]}
+ \norm{[\tau_t^{H^{(\ell)}}(A),B]}
  \le C\norm A\norm B
-       \sum_{x\in X,y\in Y}F_a(d(x,y))(e^{v\abs t}-1),
- \qquad \tau_t(A)=e^{\ii tH_b}Ae^{-\ii tH_b}.
+       \sum_{x\in X,y\in Y}F_\ell(d(x,y))
+       (e^{v\abs t}-1).
 \end{equation}
-The constants are independent of the dimension of the cell
-Hilbert spaces and of \(L\).
+The constants are independent of \(L,\ell\), and of the dimensions
+of the cell Hilbert spaces.  The same estimate holds after
+restricting the interaction to any collection of its terms.
 \end{lemma}
 \begin{proof}
-Set
-\[
- C_B(X,t)=\sup_{A\in\mathcal A_X^{\rm even},\,\norm A\le1}
-                         \norm{[\tau_t(A),B]}.
-\]
-It suffices to consider \(t\ge0\): replacing \(H_b\) by
-\(-H_b\) treats negative times with the same interaction norms.
-For a local observable supported on a set \(X\), pass to the
-interaction picture with respect to the terms contained in
-\(X\).  Differentiating its commutator with \(B\), and using
-Duhamel's formula, bounds the propagation out of \(X\) by
-twice the sum of the norms of interaction terms meeting \(X\),
-integrated against the corresponding commutator bound for
-their supports.  Enlarging the sum to all terms meeting \(X\),
-the resulting inequality is
+For fixed \(B\), let \(C_B(X,t)\) be the supremum of
+\(\norm{[\tau_t^{H^{(\ell)}}(A),B]}\) over even
+\(A\in\mathcal A_X\) of norm at most one.  The interaction-picture
+commutator equation and Duhamel's formula give, for \(t\ge0\),
 \[
  C_B(X,t)\le C_B(X,0)
- +2\sum_{Z:Z\cap X\ne\varnothing}\norm{\Phi(Z)}
-                \int_0^t C_B(Z,s)\dd s.
+ +2\sum_{Z:Z\cap X\ne\varnothing}\norm{\Phi^{(\ell)}(Z)}
+       \int_0^t C_B(Z,s)\dd s.
 \]
-Here \(C_B(Z,0)\le2\norm B\), and it vanishes if \(Z\cap Y\)
-is empty.  Iterating this integral inequality gives
-chains \(Z_1,\ldots,Z_n\) with
+Terms contained in \(X\) can first be included in the local
+interaction picture; enlarging the resulting boundary sum gives
+the displayed inequality.  Its iteration produces chains
+\(Z_1,\ldots,Z_n\) joining \(X\) to \(Y\), with ordered time
+integrals \(t^n/n!\).  Choose a cell at each intersection.
+Equation~\eqref{eq:Fbound} bounds the sum of chain weights by
 \[
- Z_1\cap X\ne\varnothing,\quad
- Z_j\cap Z_{j+1}\ne\varnothing,\quad
- Z_n\cap Y\ne\varnothing.
+ \mathcal I_\ell^n C_F^{\,n-1}
+       \sum_{x\in X,y\in Y}F_\ell(d(x,y)).
 \]
-Their ordered time integrals are \(\abs t^n/n!\).
-Choose a site at each intersection and use \eqref{eq:Fbound}.
-The sum of chain weights is at most
-\[
- \mathcal I_a^n C_F^{\,n-1}
-             \sum_{x\in X,y\in Y}F_a(d(x,y)).
-\]
-Summing the series with the commutator factor \(2^n\) proves
-\eqref{eq:LR}, with \(v=2\mathcal I_aC_F\) and an enlarged constant.
-All steps use norms, unitary conjugation, and commuting
-disjoint even algebras; no trace on a local space is used.
-The finite-volume interaction sum is norm convergent, so
-finite-sum approximations justify all differentiations.
+Since \(C_B(Z,0)\le2\norm B\), summing the series proves
+\eqref{eq:LR} with a uniform \(v\).  Negative times follow by
+replacing the interaction by its negative.  The proof uses only
+norms, unitary conjugation, and commutation of disjoint even
+algebras.  It therefore applies to local von Neumann algebra
+operators and to infinite-dimensional cell spaces.  Norm
+convergence permits finite-sum approximation when needed.
 \end{proof}
 
-We also need a local approximation to the dynamics.  Let
-\(H_{X^{(r)}}\) contain only interaction terms whose supports
-lie in the \(r\)-neighborhood of \(X\), and let
-\(\tau_t^{X^{(r)}}\) denote its dynamics.  Duhamel's formula gives
-\[
- \tau_t(A)-\tau_t^{X^{(r)}}(A)
- =\ii\int_0^t \tau_s\!
- \left([H_b-H_{X^{(r)}},
-              \tau_{t-s}^{X^{(r)}}(A)]\right)\dd s.
-\]
-Let \(\Lambda_L\) denote the cell graph.  An omitted term of
-diameter less than \(r/2\) is at distance at least \(r/2\)
-from \(X\).  Apply \eqref{eq:LR} and use
-\(\sum_Z|Z|\norm{\Phi(Z)}\le C|\Lambda_L|\), which follows
-from \eqref{eq:Fbound} with equal sites.  For terms of larger
-diameter the shell decomposition gives
-\(\sum_{\diam Z\ge r/2}\norm{\Phi(Z)}
- \le C|\Lambda_L|(1+r)^c e^{-cr^2}\).
-Write \(I_{\mathrm{short}}(u)\) and \(I_{\mathrm{long}}(u)\)
-for the corresponding sums of commutator norms in the Duhamel
-integrand, with evolved observable \(\tau_u^{X^{(r)}}(A)\).
-The preceding estimates give explicitly
-\begin{align*}
- I_{\mathrm{short}}(u)
- &\le C\norm A\,|X|\,|\Lambda_L|e^{-ar/2}
-                        (e^{v\abs u}-1),\\
- I_{\mathrm{long}}(u)
- &\le C\norm A\,|\Lambda_L|(1+r)^c e^{-cr^2}.
-\end{align*}
-The second line uses only \(\norm{[B,C]}\le2\norm B\norm C\).
-Integrating in time, absorbing the factor \(\abs t\) into a
-larger exponential, and reducing the spatial decay rate gives,
-for some \(a',v'>0\),
+For a cell set \(\Omega\), let \(H_\Omega^{(\ell)}\) contain
+only retained terms whose supports are contained in \(\Omega\).
+Write \(X^{(r)}=\{x:d(x,X)\le r\}\).  If \(r>2D\ell\), then
 \begin{equation}\label{eq:dynamicsapprox}
- \norm{\tau_t(A)-\tau_t^{X^{(r)}}(A)}
- \le C\norm A\,|X|\,|\Lambda_L|(1+r)^c e^{v'\abs t-a'r}.
+\begin{split}
+ &\norm{\tau_t^H(A)-\tau_t^{H_{X^{(r)}}^{(\ell)}}(A)}\\
+ &\quad\le C_k\norm A\,\abs t\,V_L(1+\ell)^{-k}
+       +C\norm A\,|X|V_L\abs t\,
+                e^{v\abs t-r/(2\ell)} .
+\end{split}
 \end{equation}
-The same estimate holds for restricted interactions and is
-uniform in \(L\).  Its volume prefactor is harmless because
-\(|\Lambda_L|=O(L^2)\), and we use it at \(r\) proportional
-to \(L\).  The truncated dynamics preserves neutrality.
+The first term is the norm Duhamel bound for replacing \(H\)
+by \(H^{(\ell)}\).  For the second, compare the full and
+restricted truncated dynamics by Duhamel's formula.  Every
+omitted support \(Z\) contains a cell outside \(X^{(r)}\);
+its diameter is at most \(D\ell<r/2\), so \(d(X,Z)>r/2\).
+Lemma~\ref{lem:LR}, applied to the restricted dynamics and
+\(B=\Phi^{(\ell)}(Z)\), bounds the sum of commutator norms by
+\[
+ C\norm A\,|X|e^{-r/(2\ell)}
+       (e^{v\abs u}-1)
+       \sum_Z|Z|\norm{\Phi^{(\ell)}(Z)}
+ \le C\norm A\,|X|V_Le^{-r/(2\ell)}
+       (e^{v\abs u}-1).
+\]
+Integration over \(0\le\abs u\le\abs t\) gives the second
+term of \eqref{eq:dynamicsapprox}.
+
+Choose from now on
+\[
+ \ell=L^{1/3},\qquad T=L^{1/3}.
+\]
+For \(r=\eta L\), where \(\eta>0\) is fixed, and
+\(\abs t\le T\), the right side of \eqref{eq:dynamicsapprox}
+is \(\norm A\,O(L^{-\infty})\), uniformly in \(X\).
+Indeed \(|X|\le V_L=O(L^2)\), the first term has an arbitrarily
+large negative power of \(\ell\), and the exponential in the
+second is at most
+\(e^{vL^{1/3}-(\eta/2)L^{2/3}}\).
+No estimate for a fixed linear light cone of the full
+interaction is needed.
+
+We next control the separate \(N_0\) evolution.  By
+\eqref{eq:tails},
+\[
+ N_0=\int_{\TT_L}n_R\dd R,\qquad
+ n_R=\sum_\sigma a_\sigma^\dagger(e_R)a_\sigma(e_R),
+\]
+and restricting \(e_R\) to \(B_r(R)\) gives neutral
+self-adjoint densities with error \(Ce^{-cr^2}\).
+Their shell interaction \(\Psi\) has Gaussian shell norms.
+It therefore satisfies \eqref{eq:Fbound} with
+\(F_a(r)=e^{-ar}(1+r)^{-4}\) for any fixed \(a>0\).
+The same chain proof gives the corresponding propagation
+bound with fixed constants.  Denote its restriction to
+\(\Omega\) by \((N_0)_\Omega\).  In the comparison with
+\((N_0)_{X^{(r)}}\), omitted terms of diameter less than
+\(r/2\) lie at least \(r/2\) from \(X\) and are bounded by that
+propagation estimate.  The remaining terms have total norm
+at most \(CV_L(1+r)^b e^{-cr^2}\), by the Gaussian shells,
+for a fixed \(b\).  Duhamel's formula thus gives, uniformly
+for \(\abs s\le\pi\),
+\[
+ \norm{\tau_s^{N_0}(A)-\tau_s^{(N_0)_{X^{(r)}}}(A)}
+ \le C\norm A\,|X|V_L(1+r)^b e^{-a_0r}.
+\]
+In particular this is \(\norm A\,O(L^{-\infty})\) for
+\(r=\eta L\).
+
+\begin{lemma}[Macroscopic locality of the enlarged dynamics]\label{lem:macro}
+For fixed \(\eta>0\), \(r=\eta L\), and \(\abs t\le T=L^{1/3}\),
+a bounded even operator \(A\) supported on \(X\) has an
+approximant \(\mathcal L_{t,X}^{(r)}(A)\) supported on \(X^{(2r)}\),
+such that, in ambient norm,
+\[
+ \norm{\tau_t^{H_b}(A)-\mathcal L_{t,X}^{(r)}(A)}
+ \le\norm A\,O(L^{-\infty}),\qquad
+ \norm{\mathcal L_{t,X}^{(r)}(A)}=\norm A.
+\]
+The constants are uniform in \(t,X,A\).  The approximants
+preserve adjoints and neutrality, and are measurable in \(t\).
+Consequently, if \(d(X,Y)\ge cL\) with fixed \(c>0\),
+\begin{equation}\label{eq:macrocomm}
+ \sup_{\abs t\le L^{1/3}}
+ \norm{[\tau_t^{H_b}(A),B]}
+ \le\norm A\norm B\,O(L^{-\infty})
+\end{equation}
+for bounded even \(A,B\) supported on \(X,Y\).
+\end{lemma}
+\begin{proof}
+Use the periodic factorization \eqref{eq:periodic}, and set
+\[
+ \mathcal L_{t,X}^{(r)}(A)=
+ \tau_t^{H_{X^{(2r)}}^{(\ell)}}
+ \left(\tau_{s_M(t)}^{(N_0)_{X^{(r)}}}(A)\right).
+\]
+The inner evolution is a local approximation to
+\(\tau_{s_M(t)}^{N_0}(A)\) because \(\abs{s_M(t)}\le\pi\).
+It has support in \(X^{(r)}\) and norm \(\norm A\).
+Apply \eqref{eq:dynamicsapprox} to this operator with a
+further buffer \(r\) to approximate the outer \(H\) evolution.
+The triangle inequality proves the stated error.  Both restricted
+Hamiltonians are neutral and self-adjoint.  Their unitary
+conjugations give the norm and adjoint assertions.  The chosen
+representative \(s_M(t)\) is measurable, so the approximant is
+measurable; its jumps do not affect any estimate or integral.
+The restricted evolutions need neither preserve the LLL nor
+commute with each other.  Finally choose \(2\eta<c\);
+the local approximant commutes with \(B\), proving
+\eqref{eq:macrocomm}.
+\end{proof}
 
 \subsection{Boundary currents and unbounded charges}
 
+The charge \(Q=Q_\Gamma\) is unbounded on ambient Fock space.
+A small norm error in a local approximation cannot be commuted
+with \(Q\) directly.  Finite LLL rank provides a bounded substitute
+for this commutator.
+
+\begin{lemma}[Finite charge bandwidth and a bounded current map]
+\label{lem:chargebandwidth}
+Let \(\alpha_\theta(A)=e^{\ii\theta Q}Ae^{-\ii\theta Q}\).
+For every operator \(A\) in the finite LLL CAR algebra, extended
+canonically to ambient Fock space,
+\[
+ \alpha_\theta(A)=\sum_{|n|\le M}e^{\ii n\theta}A_n.
+\]
+There is a bounded linear map \(\mathcal D_M\) on ambient bounded
+operators such that
+\[
+ \norm{\mathcal D_M(A)}\le CM\norm A,\qquad
+ \mathcal D_M(A)=\ii[A,Q]\quad\hbox{for LLL operators }A.
+\]
+The latter commutator has a bounded extension.  The map preserves
+physical support, neutrality, and self-adjointness.
+\end{lemma}
+\begin{proof}
 On the finite-particle core,
 \[
- [Q_\Gamma,a_\up(f)]=-a_\up(1_\Gamma f),\qquad
- [Q_\Gamma,a_\up^\dagger(f)]=a_\up^\dagger(1_\Gamma f).
+ [Q,a_\up(f)]=-a_\up(1_\Gamma f),\qquad
+ [Q,a_\up^\dagger(f)]=a_\up^\dagger(1_\Gamma f).
 \]
-There is no spin-down contribution.  These formulas show
-directly that \(j_R=\ii[k_R,Q_\Gamma]\) extends to a bounded
-ambient operator.  If \(R\) is inside \(\Gamma\), replace
-\(1_\Gamma f\) by \(f\) in each factor.  The resulting
-commutator vanishes because each monomial is neutral.
-Only tails outside \(\Gamma\) remain.  For \(R\) outside
-\(\Gamma\), all \(1_\Gamma f\) are tails.  Thus
-\begin{equation}\label{eq:currentdecay}
- \norm{j_R}\le Ce^{-c\,d(R,\partial\Gamma)^2}.
-\end{equation}
-Replacing the test vectors by their restrictions to a ball
-about \(R\) also gives local approximants to \(j_R\) with
-Gaussian error.  This estimate follows from the displayed
-commutator formulas, not from multiplying a norm error by
-the unbounded ambient norm of \(Q_\Gamma\).
-
-Partition the centers \(R\) according to the nearer boundary
-component and integrate \(j_R\) over the two pieces.  This
-defines \(J_\pm\), with
+Equivalently,
 \[
- J_-+J_+=\ii[H_b,Q],\qquad \norm{J_\pm}\le CL_y.
+ \alpha_\theta(a_\up^\dagger(f))
+ =a_\up^\dagger(1_{\Gamma^c}f)
+   +e^{\ii\theta}a_\up^\dagger(1_\Gamma f),
 \]
-For a local approximant within transverse radius \(r\), omit
-centers farther than \(r/2\) from the relevant boundary and
-cut off their test vectors at radius \(r/2\).
-Equation~\eqref{eq:currentdecay} and the Gaussian field tails
-give an error at most \(CL_y(1+r)^c e^{-cr^2}\).
-The identity with the commutator holds first on the core
-and then on each fixed-number sector, where \(Q\) is bounded.
+with the conjugate phase for annihilators and no phase for
+spin-down fields.  Choose any basis of the \(M\) spin-up LLL
+orbitals.  Normal-ordered monomials span the finite LLL CAR
+algebra, and each contains at most \(M\) spin-up creators and
+at most \(M\) spin-up annihilators.  Expanding the displayed
+identity in each monomial gives frequencies in \([-M,M]\).
+No estimate on the number or coefficients of these monomials is used.
+
+Choose a real even \(\rho\in C_c^\infty(\mathbb R)\), equal
+to one on \([-1,1]\) and supported in \([-2,2]\), and set
+\[
+ \kappa_M(\theta)=\sum_{n\in\mathbb Z}\rho(n/M)e^{-\ii n\theta}.
+\]
+To record its uniform bounds, put
+\(\check\rho(u)=(2\pi)^{-1}\int\rho(\xi)e^{-\ii u\xi}\dd\xi\).
+Periodization, or comparison of Fourier coefficients, gives
+\[
+ \kappa_M(\theta)=2\pi M\sum_{j\in\mathbb Z}
+                  \check\rho\bigl(M(\theta+2\pi j)\bigr).
+\]
+The Schwartz decay of \(\check\rho\) and its derivative therefore
+implies
+\[
+ \frac1{2\pi}\int_0^{2\pi}|\kappa_M(\theta)|\dd\theta\le C,
+ \qquad
+ \frac1{2\pi}\int_0^{2\pi}|\kappa'_M(\theta)|\dd\theta\le CM.
+\]
+Define
+\[
+ \mathcal D_M(A)=\frac1{2\pi}\int_0^{2\pi}
+            \kappa'_M(\theta)\alpha_\theta(A)\dd\theta.
+\]
+For arbitrary bounded operators this is a weak operator integral:
+all matrix elements of the integrand are continuous, and the
+preceding bound defines a bounded operator of norm at most
+\(CM\norm A\).  Norm continuity of the gauge action on arbitrary
+local approximants is not required.  On each of the finitely many
+Fourier modes of an LLL operator, integration by parts gives
+\[
+ \mathcal D_M(A)=\sum_{|n|\le M}(-\ii n)A_n
+ =-\left.\frac{\mathrm d}{\mathrm d\theta}
+                  \alpha_\theta(A)\right|_{\theta=0}
+ =\ii[A,Q].
+\]
+The last identity holds on the finite-particle core; the middle
+expression supplies its bounded extension.  Regional gauge rotations
+preserve local von Neumann algebras and neutrality, and these
+properties pass to the weak integral.  Since \(\kappa'_M\) is
+real, self-adjointness is preserved as well.
+\end{proof}
+
+\begin{lemma}[Boundary currents]\label{lem:currents}
+There are bounded self-adjoint neutral operators \(J_\pm\) with
+\[
+ \ii[H_b,Q]=J_-+J_+,\qquad \norm{J_\pm}\le CML_y.
+\]
+For every \(r\ge1\) they have self-adjoint neutral approximants
+\(J_\pm^{(r)}\) supported in the strips of transverse radius
+\(r\) about \(\partial_\pm\), satisfying, for every \(k\),
+\begin{equation}\label{eq:currentapprox}
+ \norm{J_\pm-J_\pm^{(r)}}
+       \le C_kML_y(1+r)^{-k}.
+\end{equation}
+All these are ambient norm bounds.
+\end{lemma}
+\begin{proof}
+Write \(H=H_{\mathrm{LLL}}\) and define
+\[
+ j_{H,R}=\mathcal D_M(h_R)=\ii[h_R,Q],\qquad
+ j_{H,R}^{(r)}=\mathcal D_M(h_R^{(r)}).
+\]
+The preceding lemma and Definition~\ref{def:local} give
+\[
+ \norm{j_{H,R}}\le CM,\qquad
+ \norm{j_{H,R}-j_{H,R}^{(r)}}\le C_kM(1+r)^{-k},\qquad
+ \supp j_{H,R}^{(r)}\subset B_r(R).
+\]
+If this ball lies wholly inside \(\Gamma\), its local neutral
+operator \(h_R^{(r)}\) is fixed by \(\alpha_\theta\); the same
+holds if the ball lies wholly outside \(\Gamma\).
+In either case \(\mathcal D_M(h_R^{(r)})=0\).
+Choose \(r=\tfrac12d(R,\partial\Gamma)\) when that distance
+is at least two, and use the uniform bound otherwise.  This proves
+\begin{equation}\label{eq:currentdecay}
+ \norm{j_{H,R}}\le C_kM
+              \bigl(1+d(R,\partial\Gamma)\bigr)^{-k}.
+\end{equation}
+
+Let \(\Omega_\pm\) partition the centers according to the nearer
+boundary component, assigning the measure-zero ties arbitrarily,
+and set
+\[
+ J_{H,\pm}=\int_{\Omega_\pm}j_{H,R}\dd R.
+\]
+Integration of \eqref{eq:currentdecay} in the transverse direction
+gives \(\norm{J_{H,\pm}}\le CML_y\), and
+\(J_{H,-}+J_{H,+}=\mathcal D_M(H)=\ii[H,Q]\).
+For \(2\le r<L_x/2\), use the explicit local approximation
+\[
+ J_{H,\pm}^{(r)}=
+ \int_{\Omega_\pm\cap\{d(R,\partial_\pm)\le r/2\}}
+                  j_{H,R}^{(r/2)}\dd R.
+\]
+Every integrand is supported in the indicated strip of radius
+\(r\).  The omitted centers contribute at most
+\(C_kML_y(1+r)^{1-k}\) by \eqref{eq:currentdecay}; the retained
+centers have area at most \(CL_yr\), so their approximation
+errors satisfy the same bound.  Increasing \(k\) proves the
+analogue of \eqref{eq:currentapprox} for \(J_{H,\pm}\).
+For \(1\le r<2\) one may use zero; when \(r\ge L_x/2\),
+the strip covers the torus and one uses the exact current.
+The same estimates apply.  If the given local
+approximants are only weakly measurable, all center integrals
+are taken weakly.  Uniform norm bounds, scalar Fubini, and the
+weak closure of the local algebras justify the formulas and
+preserve support and neutrality.
+
+For \(N_0\), the resolution of \(\Pi\) in \eqref{eq:tails}
+gives a sharper one-body construction.  Its current density is
+\[
+ j_{0,R}=\ii\bigl(
+ a_\up^\dagger(e_R)a_\up(1_\Gamma e_R)
+ -a_\up^\dagger(1_\Gamma e_R)a_\up(e_R)\bigr).
+\]
+Inside \(\Gamma\), replace \(1_\Gamma e_R\) by
+\(e_R-1_{\Gamma^c}e_R\); the two terms with \(e_R\) cancel.
+Outside \(\Gamma\), \(1_\Gamma e_R\) is already a tail.
+Thus \eqref{eq:tails} yields
+\(\norm{j_{0,R}}\le Ce^{-c d(R,\partial\Gamma)^2}\).
+Cutting every test vector off at radius \(r\) gives a local
+approximation with Gaussian error.  Integration over \(\Omega_\pm\)
+and the same center cutoff as above yield
+\begin{align*}
+ \ii[N_0,Q]&=J_{0,-}+J_{0,+},\qquad
+ \norm{J_{0,\pm}}\le CL_y,\\
+ \norm{J_{0,\pm}-J_{0,\pm}^{(r)}}
+       &\le CL_y(1+r)^c e^{-cr^2},
+\end{align*}
+with possibly different positive constants in the last estimate.
+Finally set
+\[
+ J_\pm=J_{H,\pm}-\mu_MJ_{0,\pm},\qquad
+ J_\pm^{(r)}=J_{H,\pm}^{(r)}-\mu_MJ_{0,\pm}^{(r)}.
+\]
+Since \(\mu_M=O(M)\), these have the claimed norm and rapid
+locality bounds.  The commutator identities hold on the
+finite-particle core and, in particular, on every fixed-number
+sector, where the regional charge is bounded.
+\end{proof}
 
 \section{Filters, dressing, and clustering in a sector}\label{app:filters}
 
 \subsection{The inverse-energy filter}
 
-Let \(\Delta=\min\{\gamma,\mu-C_{\mathrm{rem}}-w\}\) be the
-lower bound on the gap above the band from
-Lemma~\ref{lem:generalcomparison}.  The choice
-\(\mu>C_{\mathrm{rem}}+w+\gamma\) in
-Proposition~\ref{prop:analytic} gives \(\Delta=\gamma>w\).
-On the selected number sector,
-\(H_b\) has the same band projection, width, and gap, with
-band energies in \([E_1-\mu N,E_d-\mu N]\).
+Let \(\Delta=\gamma>w\) be the gap bound retained by
+Lemma~\ref{lem:generalcomparison}.  In the selected number sector,
+\(H_b\) has band energies in \([E_1-\mu_MN,E_d-\mu_MN]\),
+with the same width and gap.  Write \(\tau_t=\tau_t^{H_b}\).
 Choose a real smooth even function \(\chi\) equal to one near
 zero and zero for \(\abs\omega\ge\Delta\).
 With Fourier convention
@@ -1766,25 +1869,51 @@ Only the two off-diagonal blocks relative to \(P\) enter this
 identity.  The inverse-energy filter itself requires only
 \(\Delta>0\), with no restriction on the band width.
 
-To localize \(K_\pm^\infty\), approximate \(J_\pm\) in a strip
-of radius \(r/4\), use the restricted dynamics in a strip of
-radius \(r/2\), and integrate only over \(\abs t\le c_0r\).
-Choose \(c_0\) so that \(v'c_0<a'/8\) in
-\eqref{eq:dynamicsapprox}, allowing for the distance \(r/4\)
-between the two strip edges.  The errors for these times are
-exponentially small in \(r\), with polynomial boundary
-prefactors.  The omitted times are controlled by
-\eqref{eq:Wmoments}.  For every \(m\) this gives a
-self-adjoint neutral approximant \(K_\pm^{(r)}\) satisfying
+To localize the dressings, fix \(r=\eta L\), with \(\eta>0\)
+small enough that the two boundary strips remain separated.
+Approximate \(J_\pm\) in the strip of radius \(r/4\), using
+\eqref{eq:currentapprox}.  On \(|t|\le T=L^{1/3}\), apply the
+composed local approximation of Lemma~\ref{lem:macro}, with nested
+strips and buffers proportional to \(r\).  Denote the resulting
+operator by \(G_{\pm,r}(t)\): it is supported in the strip of
+radius \(r\), is self-adjoint and neutral, and satisfies
+\[
+ \sup_{|t|\le T}\norm{\tau_t(J_\pm)-G_{\pm,r}(t)}
+       =O(L^{-\infty}),\qquad
+ \norm{G_{\pm,r}(t)}\le CML_y.
+\]
+For example, first use restricted \(N_0\) dynamics in the strip
+of radius \(r/2\), then restricted range-\(L^{1/3}\) dynamics
+of \(H\) in the strip of radius \(3r/4\); cell padding fits
+inside radius \(r\) for large \(L\).  Neither restricted
+generator needs to preserve the LLL or to commute with the other.
+For each finite torus the restricted generators are bounded, so these
+operators are norm continuous between the finitely many jumps of
+\(s_M(t)\) on \([-T,T]\).  Their time integrals therefore converge
+in norm.  Set
+\[
+ K_\pm^{(r)}=\int_{-T}^T W(t)G_{\pm,r}(t)\dd t.
+\]
+The local-approximation error is \(O(L^{-\infty})\) in norm.
+For the omitted times, \eqref{eq:Wmoments} gives, for every \(m\),
+\[
+ \left\|\int_{|t|>T}W(t)\tau_t(J_\pm)\dd t\right\|
+ \le CML_y\int_{|t|>T}|W(t)|\dd t
+ \le C_mL^3T^{-m}.
+\]
+Consequently, for each fixed admissible \(\eta\),
 \begin{equation}\label{eq:Kapprox}
  \supp K_\pm^{(r)}\subset\{d(\cdot,\partial_\pm)<r\},\qquad
- \norm{K_\pm^\infty-K_\pm^{(r)}}
-       \le C_m L^c(1+r)^{-m}.
+ \norm{K_\pm^{(r)}}=O(L^3),\qquad
+ \norm{K_\pm^\infty-K_\pm^{(r)}}=O(L^{-\infty}).
 \end{equation}
-These are ambient norm bounds.  Take \(r=L_x/64\) to obtain
-the \(K_\pm\) in Proposition~\ref{prop:analytic}.
-Equation~\eqref{eq:dressingexact} then gives the required
-approximate commutation with \(P\).
+These are ambient norm estimates, and the approximants are self-adjoint
+and neutral.  Take \(r=L_x/64\); bounded aspect ratio makes the
+estimates uniform for this choice.  Then
+\eqref{eq:dressingexact} implies the required commutation estimate
+for \(K_\pm=K_\pm^{(r)}\).  A magnetic translation moves their
+supports by \(\delta=O(L^{-1})\), leaving ample margin inside
+\(B_\pm\); its conjugates supply \(K_\pm^U\).
 
 \subsection{Clustering across the low-energy projection}
 
@@ -1823,33 +1952,47 @@ Consequently, for another bounded neutral local \(B\),
 The identities are sector identities; \(\vartheta\) need not remove
 transitions in other charge sectors.
 
-For clarity, the distributional Fourier representation of
-this filter introduces no norm singularity into the commutator.
+We estimate the distributional Fourier representation directly.
 Since \(\vartheta'\) is smooth and compactly supported, the inverse
 transform of \(\vartheta\) is a multiple of \(\delta(t)\) plus
-\(\beta(t)/t\) in principal value, with \(\beta\) a Schwartz function.
-For disjoint supports the delta term vanishes in
-\([A_{\vartheta},B]\), and the integral at \(t=0\) converges because
-\eqref{eq:LR} contains \(e^{v\abs t}-1=O(\abs t)\).
-
-Let \(s=d(X,Y)\).  Split this integral at \(\abs t=c_{\mathrm t} s\),
-where \(vc_{\mathrm t}<a/2\).  The short-time contribution is bounded
-by an exponentially small quantity times
-\(\norm A\norm B|X||Y|\), using \eqref{eq:LR}.
-For the long-time contribution use
-\(\norm{[\tau_t(A),B]}\le2\norm A\norm B\) and the rapid
-decay of \(\beta(t)/t\).  Thus, for every \(m\),
-\begin{equation}\label{eq:clusterbound}
- \norm{PA(1-P)BP}
- \le C_m\norm A\norm B\,|X||Y|(1+s)^{-m}.
+\(\beta(t)/t\) in principal value, with \(\beta\) Schwartz.
+For disjoint supports \([A,B]=0\), so the delta term vanishes in
+\([A_\vartheta,B]\).  The integral at zero is norm convergent:
+\(H_b\) is bounded and the fundamental theorem of calculus gives
+\begin{equation}\label{eq:smalltime}
+ \norm{[\tau_t(A),B]}
+ \le4|t|\norm{H_b}\norm A\norm B
+ \le CL^4|t|\norm A\norm B.
 \end{equation}
-The estimate also holds for local von Neumann algebra
-operators, such as regional-charge exponentials: the
-commutator proof of Lemma~\ref{lem:LR} applies directly to
-bounded operators on the cell Fock spaces.
-For the macroscopic separated strips \(S_\pm\), their cell
-counts are polynomial in \(L\), so \eqref{eq:clusterbound}
-is precisely \eqref{eq:groundcluster}.
+This estimate uses \(H_b\) directly and does not differentiate
+\(s_M(t)\).
+
+Suppose the physical supports are separated by at least \(cL\),
+where \(c>0\) is fixed.  For a desired error \(L^{-k}\), choose
+\(a>k+4\), set \(\delta_L=L^{-a}\), and split the filter integral
+into three ranges.  For \(|t|\le\delta_L\),
+\eqref{eq:smalltime} cancels its \(1/|t|\) singularity and bounds
+the contribution by
+\(C\norm A\norm B L^4\delta_L\).
+For \(\delta_L<|t|\le T=L^{1/3}\), Lemma~\ref{lem:macro}
+bounds the commutator by
+\(C_m\norm A\norm B L^{-m}\) for every \(m\).
+The integral of \(1/|t|\) over this range costs only
+\(O((a+1)\log L)\), so choosing \(m>k+1\) suffices.
+For \(|t|>T\), the trivial commutator bound
+\(2\norm A\norm B\) and the Schwartz tail of \(\beta\)
+give \(C_b\norm A\norm B T^{-b}\) for every \(b\).
+Choosing \(b>3k\) and using \eqref{eq:clusteridentity} proves
+\begin{equation}\label{eq:clusterbound}
+ \norm{PA(1-P)BP}\le C_{k,c}\norm A\norm B L^{-k}
+ \qquad\text{for every }k.
+\end{equation}
+All support and volume factors have been absorbed using the uniform
+\(O(L^2)\) cell count in Lemma~\ref{lem:macro}.  The estimate
+also holds for bounded local von Neumann algebra operators, including
+regional-charge exponentials: the propagation proof uses only bounded
+local operators and commuting disjoint even algebras.  For \(S_-,S_+\)
+this is exactly \eqref{eq:groundcluster}.
 
 \subsection{Bookkeeping for sector-bounded charges}
 
